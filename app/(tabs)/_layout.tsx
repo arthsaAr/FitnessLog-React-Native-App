@@ -1,35 +1,59 @@
 import { Tabs } from 'expo-router';
+import { BarChart3, Calendar, Dumbbell, Home, User } from 'lucide-react-native';
 import React from 'react';
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+const _layout = () => {
+    const activeColor = '#22c55e';
+    const inactiveColor = 'gray';
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
+    <Tabs screenOptions={{
+        headerShown:false,
+        tabBarActiveTintColor: activeColor,
+        tabBarInactiveTintColor: inactiveColor,
+        tabBarStyle: {
+            backgroundColor: '#121212', //dark tab bar
+            borderTopColor: '#121212' //this does black color for the tabs and page(horizontal line in between)
+        },
+    }}> 
+        <Tabs.Screen 
+            name="index"
+            options={{
+                title: 'Home',
+                tabBarIcon: ({color, size}) => <Home color={color} width={size} height={size}/>
+            }}
+        />
+        <Tabs.Screen 
+            name="workout"
+            options={{
+                title: 'Workout',
+                tabBarIcon: ({color, size}) => <Dumbbell color={color} width={size} height={size}/>
+            }}
+        />
+        <Tabs.Screen 
+            name="calendar"
+            options={{
+                title: 'Calendar',
+                tabBarIcon: ({color, size}) => <Calendar color={color} width={size} height={size}/>
+            }}
+        />
+        <Tabs.Screen 
+            name="progress"
+            options={{
+                title: 'Progress',
+                tabBarIcon: ({color, size}) => <BarChart3 color={color} width={size} height={size}/>
+            }}
+        />
+        <Tabs.Screen 
+            name="profile"
+            options={{
+                title: 'Profile',
+                tabBarIcon: ({color, size}) => <User color={color} width={size} height={size}/>
+            }}
+        />
+
     </Tabs>
   );
-}
+};
+
+export default _layout;

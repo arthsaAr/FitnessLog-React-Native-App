@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "FitLog",
-    "slug": "FitLog",
+    "name": "FitnessLog",
+    "slug": "fitnessLog",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -38,7 +38,8 @@
             "backgroundColor": "#000000"
           }
         }
-      ]
+      ],
+      "expo-asset"
     ],
     "experiments": {
       "typedRoutes": true,
