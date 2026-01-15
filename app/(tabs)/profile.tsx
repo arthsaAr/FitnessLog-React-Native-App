@@ -10,8 +10,11 @@ const profile = () => {
   const auth = getAuth();
   const user = auth.currentUser;
 
+  //this is the state which stores the user email.
+  //if email changes, than the email here also changes correctly updating the UI on our screen
   const [email, setEmail] = useState<string | null>(null);
 
+  //this runs when this screen/profile is opened. taking the user email to show on screen!
   useEffect(() => {
     if(user?.email){
       setEmail(user.email);
