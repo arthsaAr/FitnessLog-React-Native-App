@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Check, Plus, Search } from 'lucide-react-native';
+import { Check, Plus, Search, Trophy } from 'lucide-react-native';
 import React, { useState } from 'react';
-import { Dimensions, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, Dimensions, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { exercises } from '../../allex';
 
 
@@ -199,10 +199,55 @@ export default function workout() {
         )}
       </ScrollView>
       ) : (
-        <View>
-            <Text className="text-white text-3xl font-bold mb-1">Log Workout</Text>
-            <Text className="text-secondary text-xl font-semibold mb-4">Today · {formateDate}</Text>
+        <View className="flex-1 justify-center items-center">
+
+          {/**for making a circle background we wrap the circle and the trophy inside a view */}
+          <View
+            style={{
+              width: 120,
+              height:120, 
+              borderRadius: 60,
+              backgroundColor: 'rgba(16,185,129,0.15)',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginBottom: 16,
+            }}
+          >
+            <Trophy size={72} color="#10b981" />
+
           </View>
+
+          <Text className="text-white text-3xl mb-1 mt-2">Workout Complete!</Text>    
+          <Text className='text-gray-300'>Great Job crushing your workout 💪</Text>
+
+          <View>
+            <TouchableOpacity 
+              onPress={() => {
+                Alert.alert('Replace workout?', 'Your previous workout will be replaced. Do you want to conitnue?', [
+                  {
+                    text: 'Yes',
+                    style: 'destructive',
+                    onPress: () => {
+                      setSaved(false);
+                      setWorkoutExercises([]);
+                      setSearchQuery('');
+                      setShowPanel(false);
+                    },
+                  },
+                  {
+                    text: 'No',
+                    style: 'cancel',
+                  },
+                ]);
+              }}
+              className='mt-3'>
+              <Plus className="w-5 h-5 mr-2 text-secondary" />
+              <Text className='text-white font-semibold text-normal'>
+                Log Another Workout
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       )}
     </View>
   );
