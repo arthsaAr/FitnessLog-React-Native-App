@@ -1,8 +1,8 @@
 import { useRouter } from 'expo-router';
 import { getAuth } from 'firebase/auth';
-import { Check, LogOut, Settings, UserPen } from 'lucide-react-native';
+import { Check, LogOut, Pencil, Settings, UserPen } from 'lucide-react-native';
 import React, { useEffect, useState } from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 
 export default function profile() {
@@ -110,13 +110,67 @@ export default function profile() {
           </View>
           </ScrollView>
       ) : (
-        //TODO
-        <View>
-          <TouchableOpacity className="bg-green-600 px-3 py-2 rounded-2xl flex-row items-center" onPress={() => setEdit(false)}>
-              <Check color="white" className="w-4 h-4 mr-1" />
-              <Text className="text-white font-semibold text-sm"> Save</Text>
-            </TouchableOpacity>
-        </View>
+        <ScrollView>
+          <View className='bg-[#1e1e1e] rounded-xl p-4 mb-3'
+          style={{borderWidth: 1, borderColor: '#374151'}}>
+
+            <View className='flex-row items-center'>
+              <Pencil color="white" size={20}/>
+              <Text className='text-white text-xl ml-2'>Edit Profile</Text>
+            </View>
+
+            <View className="flex-row justify-between items-center mb-4 mt-5">
+              <Text className="text-gray-400 text-lg">Name</Text>
+              <TextInput
+                  placeholder='Your name'
+                  placeholderTextColor="#999" 
+                  className='bg-[#2a2a2a] rounded-lg px-3 py-2 text-white' 
+                  style={{ width: 140, height: 50, marginRight: 17 }} 
+              />
+            </View>
+
+            <View className="flex-row justify-between items-center mb-4">
+              <Text className="text-gray-400 text-lg">Age</Text>
+              <TextInput
+                  placeholder='Years'
+                  placeholderTextColor="#999" 
+                  keyboardType='numeric' 
+                  className='bg-[#2a2a2a] rounded-lg px-3 py-2 text-white' 
+                  style={{ width: 140, height: 50, marginRight: 17 }} 
+              />
+            </View>
+
+            <View className="flex-row justify-between items-center mb-4">
+              <Text className="text-gray-400 text-lg">Weight</Text>
+              <TextInput
+                  placeholder='lbs'
+                  placeholderTextColor="#999" 
+                  keyboardType='numeric' 
+                  className='bg-[#2a2a2a] rounded-lg px-3 py-2 text-white' 
+                  style={{ width: 140, height: 50, marginRight: 17 }} 
+              />
+            </View>
+
+            <View className="flex-row justify-between items-center mb-4">
+              <Text className="text-gray-400 text-lg">Height</Text>
+              <TextInput
+                  placeholder='ft/in'
+                  placeholderTextColor="#999" 
+                  keyboardType='numeric' 
+                  className='bg-[#2a2a2a] rounded-lg px-3 py-2 text-white' 
+                  style={{ width: 140, height: 50, marginRight: 17 }} 
+              />
+            </View>
+          </View>
+
+          <View>
+            <TouchableOpacity className="bg-green-600 px-3 py-2 rounded-2xl items-center" onPress={() => setEdit(false)}>
+                <Check color="white" className="w-4 h-4 mr-1" />
+                <Text className="text-white font-semibold text-sm"> Save</Text>
+              </TouchableOpacity>
+          </View>
+        </ScrollView>
+        
       )}
       </View>
   );
