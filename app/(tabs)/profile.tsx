@@ -1,14 +1,16 @@
 import { useRouter } from 'expo-router';
 import { getAuth } from 'firebase/auth';
-import { LogOut, Settings, UserPen } from 'lucide-react-native';
+import { Check, LogOut, Settings, UserPen } from 'lucide-react-native';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
 
-const profile = () => {
+export default function profile() {
   const router = useRouter();
   const auth = getAuth();
   const user = auth.currentUser;
+
+  const [edit, setEdit] = useState(false);
 
   //this is the state which stores the user email.
   //if email changes, than the email here also changes correctly updating the UI on our screen
@@ -23,6 +25,8 @@ const profile = () => {
 
   return (
     <View className='flex-1 bg-primary px-4 pt-12'>
+      {!edit ? (
+        <ScrollView>
         <View className="flex-row justify-between items-center mb-4 px-1">
               <Text className="text-white text-3xl font-bold mb-1">Profile</Text>
         </View>
@@ -87,7 +91,8 @@ const profile = () => {
             className='bg-[#1e1e1e] rounded-xl mb-3'
             style={{borderWidth: 1, borderColor: '#374151'}}>
             <TouchableOpacity 
-                className='flex-row p-2'>
+                className='flex-row p-2'
+                onPress={() => setEdit(true)}>
               <UserPen size={20} color="#ffffff"/>
               <Text className='text-white text-lg'> Edit Profile</Text>
             </TouchableOpacity>
@@ -103,10 +108,16 @@ const profile = () => {
               <Text className='text-red-500 text-lg'> Log Out</Text>
             </TouchableOpacity>
           </View>
+          </ScrollView>
+      ) : (
+        //TODO
+        <View>
+          <TouchableOpacity className="bg-green-600 px-3 py-2 rounded-2xl flex-row items-center" onPress={() => setEdit(false)}>
+              <Check color="white" className="w-4 h-4 mr-1" />
+              <Text className="text-white font-semibold text-sm"> Save</Text>
+            </TouchableOpacity>
+        </View>
+      )}
       </View>
-  )
+  );
 }
-
-export default profile
-
-const styles = StyleSheet.create({})
