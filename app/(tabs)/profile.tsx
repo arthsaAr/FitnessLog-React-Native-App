@@ -1,11 +1,18 @@
 import { useRouter } from 'expo-router';
 import { getAuth } from 'firebase/auth';
+import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
 import { Check, LogOut, Pencil, Settings, UserPen } from 'lucide-react-native';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 
 export default function profile() {
+  //states for profile inputs
+  const [name, setName] = useState('');
+  const [age, setAge] = useState<number | null>(null);
+  const [weight, setWeight] = useState<number | null>(null);
+  const [height, setHeight] = useState<number | null>(null);
+
   const router = useRouter();
   const auth = getAuth();
   const user = auth.currentUser;
@@ -15,13 +22,79 @@ export default function profile() {
   //this is the state which stores the user email.
   //if email changes, than the email here also changes correctly updating the UI on our screen
   const [email, setEmail] = useState<string | null>(null);
+  const [memberSince, setMemberSince] = useState<Date | null>(null);
 
   //this runs when this screen/profile is opened. taking the user email to show on screen!
   useEffect(() => {
     if(user?.email){
       setEmail(user.email);
     }
+
+    const fetchProfile = async () => {
+      try {
+        const auth = getAuth();
+        const user = auth.currentUser;
+        if(!user) {
+          return;
+        }
+
+        const dataBase = getFirestore();
+        const userDoc = doc(dataBase, 'users', user.uid);
+        const snap = await getDoc(userDoc);
+
+        if(snap.exists()){
+          const data = snap.data();
+          setName(data.name ?? null);
+          setAge(data.age ?? null);
+          setHeight(data.height ?? null);
+          setWeight(data.weight ?? null);
+
+          setMemberSince(data.updatedAt.toDate());
+        }
+
+      }catch (error) {
+        console.error('Failed to load profile!');
+      }
+    };
+    fetchProfile();
   }, []);
+
+  const saveProfile = async () => {
+    if(!name.trim() || !age || !height || !weight) {
+      alert('Please fill all fields');
+      return;
+    }
+
+    try {
+      const auth = getAuth();
+      const user = auth.currentUser;
+      if(!user) {
+        alert('No user logged in');
+        return;
+      }
+
+      const dataBase = getFirestore();
+
+      await setDoc(
+        doc(dataBase, 'users', user.uid),
+        {
+          name,
+          age: Number(age),
+          height: Number(height),
+          weight: Number(weight),
+          email: user.email,
+          updatedAt: new Date(),
+        },
+        { merge: true }
+      );
+      alert('Profile updated successfully');
+      setEdit(false);
+        } catch (error) {
+      alert('failed to save profile');
+        }
+      }
+
+  
 
   return (
     <View className='flex-1 bg-primary px-4 pt-12'>
@@ -58,22 +131,22 @@ export default function profile() {
               
               <View className="flex-row justify-between mb-4 mt-2">
                 <Text className="text-gray-400 text-lg">Age</Text>
-                <Text className="text-white text-lg">20 years</Text>
+                <Text className="text-white text-lg">{age ?? 'N/A'}</Text>
               </View>
 
               <View className="flex-row justify-between mb-4">
                 <Text className="text-gray-400 text-lg">Weight</Text>
-                <Text className="text-white text-lg">180 lbs</Text>
+                <Text className="text-white text-lg">{weight ?? 'N/A'} lbs</Text>
               </View>
 
               <View className="flex-row justify-between mb-4">
                 <Text className="text-gray-400 text-lg">Height</Text>
-                <Text className="text-white text-lg">5'9"</Text>
+                <Text className="text-white text-lg">{height ?? 'N/A'} cm</Text>
               </View>
 
               <View className="flex-row justify-between">
                 <Text className="text-gray-400 text-lg">Member Since</Text>
-                <Text className="text-white text-lg">Jan 2025</Text>
+                <Text className="text-white text-lg">{memberSince ? memberSince.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'N/A'}</Text>
               </View>
           </View>
 
@@ -126,6 +199,7 @@ export default function profile() {
                   placeholderTextColor="#999" 
                   className='bg-[#2a2a2a] rounded-lg px-3 py-2 text-white' 
                   style={{ width: 140, height: 50, marginRight: 17 }} 
+                  onChangeText={setName}
               />
             </View>
 
@@ -137,6 +211,10 @@ export default function profile() {
                   keyboardType='numeric' 
                   className='bg-[#2a2a2a] rounded-lg px-3 py-2 text-white' 
                   style={{ width: 140, height: 50, marginRight: 17 }} 
+                  onChangeText={(text) => {
+                    const digitsOnly = text.replace(/[^0-9]/g, '');
+                    setAge(digitsOnly);
+                  }}
               />
             </View>
 
@@ -148,23 +226,33 @@ export default function profile() {
                   keyboardType='numeric' 
                   className='bg-[#2a2a2a] rounded-lg px-3 py-2 text-white' 
                   style={{ width: 140, height: 50, marginRight: 17 }} 
+                  onChangeText={(text) => {
+                    const digitsOnly = text.replace(/[^0-9]/g, '');
+                    setWeight(digitsOnly);
+                  }}
               />
             </View>
 
             <View className="flex-row justify-between items-center mb-4">
               <Text className="text-gray-400 text-lg">Height</Text>
               <TextInput
-                  placeholder='ft/in'
+                  placeholder='cm'
                   placeholderTextColor="#999" 
                   keyboardType='numeric' 
                   className='bg-[#2a2a2a] rounded-lg px-3 py-2 text-white' 
                   style={{ width: 140, height: 50, marginRight: 17 }} 
+                  onChangeText={(text) => {
+                    const digitsOnly = text.replace(/[^0-9]/g, '');
+                    setHeight(digitsOnly);
+                  }}
               />
             </View>
           </View>
 
           <View>
-            <TouchableOpacity className="bg-green-600 px-3 py-2 rounded-2xl items-center" onPress={() => setEdit(false)}>
+            <TouchableOpacity className="bg-green-600 px-3 py-2 rounded-2xl items-center" onPress={() => {
+              saveProfile();
+            }}>
                 <Check color="white" className="w-4 h-4 mr-1" />
                 <Text className="text-white font-semibold text-sm"> Save</Text>
               </TouchableOpacity>
