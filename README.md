@@ -18,12 +18,8 @@ This project is currently in the **development phase**, and features, UI, and ar
 </p>
 
 <p align="center">
-  <img src="assets/prototype/edit-profile.png" width="200" />
   <img src="assets/prototype/workout.png" width="200" />
   <img src="assets/prototype/progress.png" width="200" />
-</p>
-
-<p align="center">
   <img src="assets/prototype/calendar.png" width="200" />
 </p>
 
