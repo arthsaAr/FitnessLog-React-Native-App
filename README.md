@@ -9,6 +9,20 @@ This project is currently in the **development phase**, and features, UI, and ar
  **Development started:** November 11, 2025  
  **Development status:** Ongoing
 
+## 📱 App Screens
+
+<p align="center">
+  <img src="assets/prototype/login.png" width="200" />
+  <img src="assets/prototype/home.png" width="200" />
+  <img src="assets/prototype/profile.png" width="200" />
+</p>
+
+<p align="center">
+  <img src="assets/prototype/workout.png" width="200" />
+  <img src="assets/prototype/progress.png" width="200" />
+  <img src="assets/prototype/calendar.png" width="200" />
+</p>
+
 ---
 
 ## 🚀 Get Started
