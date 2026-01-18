@@ -9,29 +9,23 @@ This project is currently in the **development phase**, and features, UI, and ar
  **Development started:** November 11, 2025  
  **Development status:** Ongoing
 
-## 📱 App Prototype
+## 📱 App Screens
 
-### Login Screen
-![Login Screen](assets/prototype/login.png)
+<p align="center">
+  <img src="assets/prototype/login.png" width="200" />
+  <img src="assets/prototype/home.png" width="200" />
+  <img src="assets/prototype/profile.png" width="200" />
+</p>
 
-### Home Screen
-![Home Screen](assets/prototype/home.png)
+<p align="center">
+  <img src="assets/prototype/edit-profile.png" width="200" />
+  <img src="assets/prototype/workout.png" width="200" />
+  <img src="assets/prototype/progress.png" width="200" />
+</p>
 
-### Profile Screen
-![Profile Screen](assets/prototype/profile.png)
-
-### Edit Profile Screen
-![Edit profile view](assets/prototype/profile.png)
-
-### Workout Screen
-![Workout Screen](assets/prototype/workout.png)
-
-### Progress Screen
-![Progress Screen](assets/prototype/progress.png)
-
-### Calendar Screen
-![Calendar Screen](assets/prototype/home.png)
-
+<p align="center">
+  <img src="assets/prototype/calendar.png" width="200" />
+</p>
 
 ---
 
