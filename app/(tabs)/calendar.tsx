@@ -5,6 +5,23 @@ import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 const calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   
+  const year = currentMonth.getFullYear();
+  const month = currentMonth.getMonth();
+
+  const firstDayOfMonth = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  const clendarDays = [];
+
+  //gaps in front
+  for(let i =0; i< firstDayOfMonth; i++) {
+    clendarDays.push(null);
+  }
+
+  //actual dates
+  for(let day=1; day<=daysInMonth; day++) {
+    clendarDays.push(day);
+  }
 
   const getMonthYear = (date: Date) => {
     const monthNames = [
@@ -52,7 +69,7 @@ const calendar = () => {
           </TouchableOpacity>
         </View>
 
-        <View className='justify-between items-center flex-row gap-2'>
+        {/* <View className='justify-between items-center flex-row gap-2'>
           <Text className="text-gray-300 pt-2 text-sm">
             Sun 
           </Text>
@@ -74,6 +91,28 @@ const calendar = () => {
           <Text className="text-gray-300 pt-2 text-sm">
             Sat 
           </Text>
+        </View> */}
+
+        <View className='flex-row justify-between mt-4'>
+          {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day =>
+          <Text key={day} className="text-gray-300 text-center text-sm" style={{width: "14.28%"}}>
+            {day}
+          </Text>
+          ))}
+        </View>
+
+        <View className='flex-row flex-wrap mt-2'>
+          {clendarDays.map((day, index) => (
+            <View key={index} style={{width: "14.28%", height: 40}} className="justify-center items-center mb-2">
+              {
+                day && (
+                  <Text className='text-white text-base'>
+                    {day}
+                  </Text>
+                )
+              }
+            </View>
+          ))}
         </View>
         
       </View>
