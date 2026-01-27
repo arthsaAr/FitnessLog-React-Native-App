@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { BarChart3, Calendar, Dumbbell, Home, User } from 'lucide-react-native';
+import { Dumbbell, History, Home, User } from 'lucide-react-native';
 import React from 'react';
 
 const _layout = () => {
@@ -30,18 +30,25 @@ const _layout = () => {
                 tabBarIcon: ({color, size}) => <Dumbbell color={color} width={size} height={size}/>
             }}
         />
-        <Tabs.Screen 
+        {/* <Tabs.Screen 
             name="calendar"
             options={{
                 title: 'Calendar',
                 tabBarIcon: ({color, size}) => <Calendar color={color} width={size} height={size}/>
             }}
-        />
-        <Tabs.Screen 
+        /> */}
+        {/* <Tabs.Screen 
             name="progress"
             options={{
                 title: 'Progress',
                 tabBarIcon: ({color, size}) => <BarChart3 color={color} width={size} height={size}/>
+            }}
+        /> */}
+        <Tabs.Screen 
+            name="history"
+            options={{
+                title: 'History',
+                tabBarIcon: ({color, size}) => <History color={color} width={size} height={size}/>
             }}
         />
         <Tabs.Screen 
@@ -51,7 +58,6 @@ const _layout = () => {
                 tabBarIcon: ({color, size}) => <User color={color} width={size} height={size}/>
             }}
         />
-
     </Tabs>
   );
 };
