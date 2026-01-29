@@ -63,7 +63,9 @@ export default function Index() {
     </View>
 
     {/**The new workout button! */}
-    <TouchableOpacity className="rounded-xl mb-3 mt-3" style={{borderWidth:1, borderColor: '#22C55E'}}>
+    <TouchableOpacity className="rounded-xl mb-3 mt-3" style={{borderWidth:1, borderColor: '#22C55E'}}
+      onPress={() => router.push('/workout')}
+    >
       <LinearGradient colors={
         [
           'rgba(34,197,94,0.25)',   //green bright glowing
