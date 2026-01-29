@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import { Clock, Dumbbell } from "lucide-react-native";
+import { Dumbbell, Flame, Goal, TrendingUp } from "lucide-react-native";
 import React from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 
@@ -23,10 +23,10 @@ export default function Index() {
       >
         <Dumbbell color="green" className="w-6 h-6 mb-2" />
         <Text className="text-white pt-2 text-semibold text-xl">
-          23
+          5
         </Text>
         <Text className="text-gray-300">
-        Total Workouts
+        Five workout this week
         </Text>
       </View>
 
@@ -34,14 +34,62 @@ export default function Index() {
         className="flex-1 bg-[#1e1e1e] rounded-xl p-4 mb-3"
         style={{borderWidth: 1, borderColor: '#374151'}}
       >
-        <Clock  color="lightblue" className="w-6 h-6 mb-2" />
+        <Flame color="orange" className="w-6 h-6 mb-2" />
         <Text className="text-white pt-2 text-semibold text-xl">
-          Today
+          2,450
         </Text>
         <Text className="text-gray-300">
-        Last Workout
+        Calories Burned
         </Text>
       </View>
+    </View>
+
+    <View className="flex-row gap-3">
+      <View 
+        className="flex-1 bg-[#1e1e1e] rounded-xl p-4 mb-3"
+        style={{borderWidth: 1, borderColor: '#374151'}}
+      >
+        <TrendingUp color="blue" className="w-6 h-6 mb-2" />
+        <Text className="text-white pt-2 text-semibold text-xl">
+          12
+        </Text>
+        <Text className="text-gray-300">
+        Active Days
+        </Text>
+      </View>
+
+      <View 
+        className="flex-1 bg-[#1e1e1e] rounded-xl p-4 mb-3"
+        style={{borderWidth: 1, borderColor: '#374151'}}
+      >
+        <Goal color="purple" className="w-6 h-6 mb-2" />
+        <Text className="text-white pt-2 text-semibold text-xl">
+          3
+        </Text>
+        <Text className="text-gray-300">
+        Goals Completed
+        </Text>
+      </View>
+    </View>
+
+    <View 
+      className="flex-1 bg-[#1e1e1e] rounded-xl p-4 mt-3"
+      style={{borderWidth: 1, borderColor: '#374151'}}
+    >
+        <Text className="text-white text-lg ">
+       Weekly Activity
+        </Text>
+
+        {/**trying to make chart */}
+        <View className="flex-row justify-between mt-40">
+          <Text className="text-gray-400 text-sm">Mon</Text>
+          <Text className="text-gray-400 text-sm">Tue</Text>
+          <Text className="text-green-500 text-sm">Wed</Text>
+          <Text className="text-gray-400 text-sm">Thu</Text>
+          <Text className="text-gray-400 text-sm">Fri</Text>
+          <Text className="text-gray-400 text-sm">Sat</Text>
+          <Text className="text-gray-400 text-sm">Sun</Text>
+        </View>
     </View>
 
     {/* Recent Workouts */}
