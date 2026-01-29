@@ -1,3 +1,4 @@
+import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { Clock, Dumbbell, Plus } from "lucide-react-native";
 import React from "react";
@@ -62,20 +63,31 @@ export default function Index() {
     </View>
 
     {/**The new workout button! */}
-    <TouchableOpacity className="rounded-xl bg-green-500 p-4 mb-3" style={{borderWidth:1, borderColor: 'green'}}>
-      <View className="justify-between items-center flex-row">
-        <View>
-        <Text className="text-white text-2xl">
-          Start New Workout
-        </Text>
-        <Text className="text-gray-500 text-lg">
-          Begin logging your exercises
-        </Text>
-        </View>
-        <View className="rounded-xl bg-primary">
-          <Plus color="white" size={30} />
-        </View>
+    <TouchableOpacity className="rounded-xl mb-3 mt-3" style={{borderWidth:1, borderColor: '#22C55E'}}>
+      <LinearGradient colors={
+        [
+          'rgba(34,197,94,0.25)',   //green bright glowing
+          'rgba(34,197,94,0.05)',  //fade out type
+        ]
+      }
+      start={{x:0, y:0}}
+      end={{x:1, y:1}}
+      className="rounded-xl p-4"
+      >
+        <View className="justify-between items-center flex-row">
+          <View>
+            <Text className="text-white text-2xl">
+              Start New Workout
+            </Text>
+            <Text className="text-gray-500 text-lg">
+              Begin logging your exercises
+            </Text>
+          </View>
+          <View className="rounded-xl bg-primary p-2">
+            <Plus color="white" size={30} />
+          </View>
       </View>
+      </LinearGradient>
     </TouchableOpacity>
 
     {/* Recent Workouts */}
