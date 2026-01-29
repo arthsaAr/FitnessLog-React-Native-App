@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import { Clock, Dumbbell } from "lucide-react-native";
+import { Clock, Dumbbell, Plus } from "lucide-react-native";
 import React from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 
@@ -21,11 +21,20 @@ export default function Index() {
         className="flex-1 bg-[#1e1e1e] rounded-xl p-4 mb-3"
         style={{borderWidth: 1, borderColor: '#374151'}}
       >
-        <Dumbbell color="green" className="w-6 h-6 mb-2" />
-        <Text className="text-white pt-2 text-semibold text-xl">
+        <View
+          className="self-start"
+          style={{
+            backgroundColor: 'rgba(34,197,94,0.15)',
+            borderRadius:999,
+            padding:8,
+          }}
+        >
+          <Dumbbell color="green" size={22} />
+        </View>
+        <Text className="text-white pt-2 text-semibold text-3xl">
           23
         </Text>
-        <Text className="text-gray-300">
+        <Text className="text-gray-300 text-lg">
         Total Workouts
         </Text>
       </View>
@@ -34,15 +43,40 @@ export default function Index() {
         className="flex-1 bg-[#1e1e1e] rounded-xl p-4 mb-3"
         style={{borderWidth: 1, borderColor: '#374151'}}
       >
-        <Clock  color="lightblue" className="w-6 h-6 mb-2" />
+        <View 
+          className="self-start"
+          style={{
+          backgroundColor: 'rgba(59,130,246,0.15)',
+          borderRadius:999,
+          padding:8,
+        }}>
+          <Clock color="#3B82F6" size={22} />
+        </View>
         <Text className="text-white pt-2 text-semibold text-xl">
           Today
         </Text>
-        <Text className="text-gray-300">
+        <Text className="text-gray-300 text-lg">
         Last Workout
         </Text>
       </View>
     </View>
+
+    {/**The new workout button! */}
+    <TouchableOpacity className="rounded-xl bg-green-500 p-4 mb-3" style={{borderWidth:1, borderColor: 'green'}}>
+      <View className="justify-between items-center flex-row">
+        <View>
+        <Text className="text-white text-2xl">
+          Start New Workout
+        </Text>
+        <Text className="text-gray-500 text-lg">
+          Begin logging your exercises
+        </Text>
+        </View>
+        <View className="rounded-xl bg-primary">
+          <Plus color="white" size={30} />
+        </View>
+      </View>
+    </TouchableOpacity>
 
     {/* Recent Workouts */}
     <View className="flex-row gap-5 justify-between items-center mt-4">
