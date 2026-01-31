@@ -1,8 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect } from 'expo-router';
 import { Check, Plus, Search, Trophy } from 'lucide-react-native';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Alert, Dimensions, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { exercises } from '../../allex';
+
+
 
 
 export default function workout() {
@@ -30,6 +33,19 @@ export default function workout() {
   const panelHeight = Dimensions.get("window").height*0.65;
   //const SecondpanelHeight = Dimensions.get("window").height*0.20;
 
+
+  {/**when leaving the workout screen, reseting the exercise panel, clearing search, and reseting the state */}
+  useFocusEffect(
+    useCallback(() => {
+      
+      return () => {
+        setShowPanel(false);
+        setSearchQuery('');
+        setWorkoutExercises([]);
+        setSaved(false);
+      };
+    }, [])
+  );
   //function to save workout to localstorage/
   const saveWorkout = async() => {
     const todayIs = formateDate;
