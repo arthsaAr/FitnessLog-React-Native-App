@@ -123,7 +123,14 @@ export default function Index() {
       </View>
         
     </View>
-
+    <View 
+      className="flex-1 gap-1 justify-center bg-[#1e1e1e] rounded-xl p-4 mt-5"
+      style={{borderWidth: 1, borderColor: '#374151'}}
+    >
+      <Text className="text-gray-400 text-lg">
+        💪 Consistency is key! Try to log your workouts regularly to track your fitness journey.
+      </Text>
+    </View>
 
 
 
