@@ -13,35 +13,38 @@ const history = () => {
         </View>
       </View>
 
-        <View className='bg-[#1e1e1e] rounded-xl mb-3'
+        <View className='bg-[#1e1e1e] rounded-xl mb-3 p-4'
           style={{borderWidth: 1, borderColor: '#374151'}}>
             
             {/* first row today and right arrow*/}
-          <View className='flex-row justify-between items-center w-full'>
-            <Text className=' text-white p-3 text-lg'>Today</Text>
+          <View className='flex-row justify-between items-center mb-3'>
+            <Text className=' text-white text-xl'>Today</Text>
             <ChevronRight color="white"/>
           </View>
 
           {/* second row with dumbbell and exercise */}
-          <View className='justify-between flex-row p-1'>
+          <View className='justify-between flex-row mb-3'>
             <View className='flex-row items-center '>
               <Dumbbell color="white" size={18}/>
-              <Text className='text-gray-400 p-1 text-sm'> 3 exercises</Text>
+              <Text className='text-gray-400 ml-1'> 3 exercises</Text>
             </View>
           
             <View className='flex-row items-center '>
               <Calendar color="white" size={18}/>
-              <Text className='text-white p-1 text-sm'> 45 minutes</Text>
+              <Text className='text-gray-400 ml-1'> 45 minutes</Text>
             </View>
           </View>
 
+          {/*making a divider line */}
+          <View className='h-1 bg-gray-700 my-2 opacity-40'  />
+
           {/* adding dummy exercises for now*/}
-          <View className='flex-row justify-between ml-2 mr-2 mb-2 mt-1'>
-            <Text className='text-white'>Bench Press</Text>
-            <Text className='text-gray-400'>4 × 10 @ 185lb</Text>
+          <View className='flex-row justify-between mt-1'>
+            <Text className='text-white text-lg'>Bench Press</Text>
+            <Text className='text-gray-400 text-lg'>4 × 10 @ 185lb</Text>
           </View>
 
-          <View className='flex-row justify-between ml-2 mr-2 mb-2 mt-1'>
+          {/* <View className='flex-row justify-between ml-2 mr-2 mb-2 mt-1'>
             <Text className='text-white'>Incline Dumbell Press</Text>
             <Text className='text-gray-400'>3 × 12 @ 70lb</Text>
           </View>
@@ -49,7 +52,7 @@ const history = () => {
           <View className='flex-row justify-between ml-2 mr-2 mb-2 mt-1'>
             <Text className='text-white'>Squats</Text>
             <Text className='text-gray-400'>4 × 11 @ 135lb</Text>
-          </View>
+          </View> */}
 
         </View>
       </ScrollView>
