@@ -61,7 +61,7 @@ export default function profile() {
 
   const saveProfile = async () => {
     if(!name.trim() || !age || !height || !weight) {
-      alert('Please fill all fields');
+      alert('Something went wrong, please check your details!');
       return;
     }
 
@@ -120,7 +120,7 @@ export default function profile() {
               >
           </View>
             <View className='mt-4'>
-                <Text className='text-white text-lg'> John Don</Text>
+                <Text className='text-white text-lg'> {name ?? 'N/A'}</Text>
                 <Text className='text-white text-lg'> {email ?? 'N/A'}</Text>
             </View>
           </View>
