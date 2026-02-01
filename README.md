@@ -23,6 +23,8 @@ This project is currently in the **development phase**, and features, UI, and ar
   <img src="assets/prototype/calendar.png" width="200" />
 </p>
 
+Some designs are changed, New designs will be updated soon!
+
 ---
 
 ## 🚀 Get Started
