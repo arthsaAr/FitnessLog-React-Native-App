@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from 'expo-router';
-import { Check, Plus, Search, Trophy } from 'lucide-react-native';
+import { Check, ChevronLeft, Plus, Search, Trophy } from 'lucide-react-native';
 import React, { useCallback, useState } from 'react';
 import { Alert, Dimensions, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { exercises } from '../../allex';
@@ -186,7 +186,7 @@ export default function workout() {
               </View>
 
               {/*Scrollable list*/}
-                <ScrollView className="mt-6" showsVerticalScrollIndicator={false} nestedScrollEnabled={true}>
+                <ScrollView className="mt-6 mb-4" showsVerticalScrollIndicator={false} nestedScrollEnabled={true}>
                   {filteredExercises.map((ex, idx) => (
                     <TouchableOpacity key={idx} className='bg-[#2a2a2a] rounded-lg py-4 px-3 mb-3'
                     onPress={() => {
@@ -201,6 +201,16 @@ export default function workout() {
                     </TouchableOpacity>
                   ))}
                 </ScrollView>
+
+              {/**A back button to workout main screen*/}
+              <View className='mt-4'>
+                <TouchableOpacity 
+                    className='flex-row justify-center bg-gray-300 px-4 py-3 rounded-2xl'
+                    onPress={() => setShowPanel(false)}>
+                  <ChevronLeft size={20} className="mr-2" /> 
+                  <Text className='font-semibold text-lg'>Back</Text>
+                </TouchableOpacity>
+              </View>
             </View>
         )}
 
