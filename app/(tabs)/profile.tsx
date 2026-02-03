@@ -1,7 +1,7 @@
 import { useRouter } from 'expo-router';
 import { getAuth } from 'firebase/auth';
 import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
-import { ArrowLeft, Check, LogOut, Pencil, Settings, UserPen } from 'lucide-react-native';
+import { ArrowLeft, Check, LogOut, Pencil, UserPen } from 'lucide-react-native';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
@@ -121,7 +121,7 @@ export default function profile() {
           </View>
             <View className='mt-4'>
                 <Text className='text-white text-lg'> {name ?? 'N/A'}</Text>
-                <Text className='text-white text-lg'> {email ?? 'N/A'}</Text>
+                <Text className='text-gray-400 text-lg'> {email ?? 'N/A'}</Text>
             </View>
           </View>
 
@@ -150,7 +150,8 @@ export default function profile() {
               </View>
           </View>
 
-          <View 
+          {/**Hiding from UI (to be implemented) */}
+          {/* <View 
             className='bg-[#1e1e1e] rounded-xl mb-3'
             style={{borderWidth: 1, borderColor: '#374151'}}>
             <TouchableOpacity 
@@ -158,7 +159,7 @@ export default function profile() {
               <Settings size={20} color="#ffffff"/>
               <Text className='text-white text-lg'> Settings</Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
 
           <View 
             className='bg-[#1e1e1e] rounded-xl mb-3'

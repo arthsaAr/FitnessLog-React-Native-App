@@ -95,7 +95,8 @@ export default function Index() {
     {/* Recent Workouts */}
     <View className="flex-row gap-5 justify-between items-center mt-4">
       <Text className="text-white text-lg">Recent Workouts</Text>
-      <TouchableOpacity>
+      <TouchableOpacity 
+        onPress={() => router.push('/history')}>
         <Text className="text-green-400 text-lg">View All</Text>
       </TouchableOpacity>
     </View>
