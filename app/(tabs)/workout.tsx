@@ -173,9 +173,16 @@ export default function workout() {
                 <View className='flex-row justify-between'>
                   <Text className='text-gray-300 text-sm mb-0'>Weight(lbs)</Text>
                   <TouchableOpacity 
-                      onPress={
-                        {/*to be implemented */}
-                      }>
+                      onPress= {
+                        () => {
+                          const newExercises = [...workoutExercises];
+                          if(newExercises[index].sets.length > 1){
+                            newExercises[index].sets.pop();
+                            setWorkoutExercises(newExercises);
+                          }
+                        }
+                      }
+                      >
                   <View>
                     <Minus color="red" size={20}/>
                   </View></TouchableOpacity>
