@@ -1,7 +1,7 @@
 import { useFocusEffect } from 'expo-router';
 import { getAuth } from 'firebase/auth';
 import { arrayUnion, doc, getFirestore, setDoc } from 'firebase/firestore';
-import { Check, ChevronLeft, Plus, Search, Trophy } from 'lucide-react-native';
+import { Check, ChevronLeft, Minus, Plus, Search, Trophy } from 'lucide-react-native';
 import React, { useCallback, useState } from 'react';
 import { Alert, Dimensions, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { exercises } from '../../allex';
@@ -170,7 +170,16 @@ export default function workout() {
               
               {/*Weight*/}
               <View>
-                <Text className='text-gray-300 text-sm mb-0'>Weight(lbs)</Text>
+                <View className='flex-row justify-between'>
+                  <Text className='text-gray-300 text-sm mb-0'>Weight(lbs)</Text>
+                  <TouchableOpacity 
+                      onPress={
+                        {/*to be implemented */}
+                      }>
+                  <View>
+                    <Minus color="red" size={20}/>
+                  </View></TouchableOpacity>
+                </View>
                 <TextInput
                   placeholderTextColor="#999" 
                   keyboardType='numeric' 
