@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { auth } from '../firebaseConfig';
 
+
 export default function loginScreen() {
     const [activeTab, setActiveTab] = useState<"login" | "signup">("login");
     const [signButton, setsignButton] = useState<"signin" | "createAccount">("signin");
@@ -29,7 +30,10 @@ export default function loginScreen() {
         try{
             const userDetails = await signInWithEmailAndPassword(auth, email, password);
             const user = userDetails.user;
-            Alert.alert("Login Successful", `Welcome back, ${user.email}!`);
+
+            const userName = user.email?.split("@")[0];
+
+            Alert.alert("Login Successful", `Welcome back, ${userName}`);
             router.replace("/(tabs)");
         } catch (error: any) {
             Alert.alert("Login Failed", "Please check your email and password and try again.");
@@ -53,7 +57,9 @@ export default function loginScreen() {
         try{
             const userDetails = await createUserWithEmailAndPassword(auth, email, password);
             const user = userDetails.user;
-            Alert.alert("Account Created", `Welcome, ${user.email}!`);
+            const userName = user.email?.split("@")[0];
+
+            Alert.alert("Account Created", `Welcome, ${userName}`);
             router.replace("/login");
         } catch (error: any) {
             Alert.alert("Registration Failed", "Please check your email and password and try again.");
