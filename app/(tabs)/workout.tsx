@@ -1,11 +1,10 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from 'expo-router';
+import { getAuth } from 'firebase/auth';
+import { arrayUnion, doc, getFirestore, setDoc } from 'firebase/firestore';
 import { Check, ChevronLeft, Plus, Search, Trophy } from 'lucide-react-native';
 import React, { useCallback, useState } from 'react';
 import { Alert, Dimensions, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { exercises } from '../../allex';
-
-
 
 
 export default function workout() {
@@ -15,6 +14,11 @@ export default function workout() {
   const [showPanel, setShowPanel] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   //const [selectedExercise, setSelectedExercise] = useState<string[]>([]);  // controls Exercise Details panel
+
+  //here use must first exist before saving, else currentUser will never exist!
+  const db = getFirestore();
+  const auth = getAuth();
+  const user = auth.currentUser;
 
   interface ExerciseSet {
     reps: string;
@@ -48,21 +52,52 @@ export default function workout() {
   );
   //function to save workout to localstorage/
   const saveWorkout = async() => {
-    const todayIs = formateDate;
-    try {
-      const storedData = await AsyncStorage.getItem('workouts');
-      const allWorkouts = storedData ? JSON.parse(storedData) : {};    //takes all the data from the stored data
-
-      //adding today's exercises
-      allWorkouts[todayIs] = workoutExercises;   //adding todays date with the exercises done today 
-
-      //saving back the data into the workouts
-      await AsyncStorage.setItem('workouts', JSON.stringify(allWorkouts));
-      setSaved(true);
-      alert('Successfully saved workout!');
-    } catch (e) {
-      alert('Failed to save workout.');
+    if(!user){
+      alert("Please log in to save your workout!");
+      return;
     }
+
+    const todayIs = formateDate;
+
+    try {
+      const userWorkoutRef = doc(db, "workouts", user.uid);
+      
+      //here each workout is a object with date and exercises
+      const workoutData =  {
+      date: todayIs,
+      exercises: workoutExercises
+      };
+
+      
+    await setDoc(
+      userWorkoutRef,
+      { sessions: arrayUnion(workoutData) },
+      { merge: true }
+    );
+
+    setSaved(true);
+    alert("Workour saved to Firebase!");
+    } catch(e){
+      console.log("Error saving workout:", e);
+      alert("Failed to save workout.");
+    }
+
+
+    // const todayIs = formateDate;
+    // try {
+    //   const storedData = await AsyncStorage.getItem('workouts');
+    //   const allWorkouts = storedData ? JSON.parse(storedData) : {};    //takes all the data from the stored data
+
+    //   //adding today's exercises
+    //   allWorkouts[todayIs] = workoutExercises;   //adding todays date with the exercises done today 
+
+    //   //saving back the data into the workouts
+    //   await AsyncStorage.setItem('workouts', JSON.stringify(allWorkouts));
+    //   setSaved(true);
+    //   alert('Successfully saved workout!');
+    // } catch (e) {
+    //   alert('Failed to save workout.');
+    // }
   };
 
   return (
