@@ -50,8 +50,32 @@ export default function workout() {
       };
     }, [])
   );
+
+  const workoutValidator = () => {
+    if(workoutExercises.length === 0){
+      return false;
+    }
+
+    return workoutExercises.every(exercises => 
+      exercises.sets.every(
+        set => numValidator(set.reps) && numValidator(set.weight)
+      )
+    );
+  };
+
+  const numValidator = (value: string) => {
+    const num = Number(value);
+    return value.trim() !== '' && !isNaN(num) && num >0;
+  }
+
   //function to save workout to localstorage/
   const saveWorkout = async() => {
+   //this is for at least exercise should exist
+    if(!workoutValidator()){
+      Alert.alert("Incomplete workout", "Please fill in both reps and weight for all sets before saving");
+      return;
+    }
+
     //user login check
     if(!user){
       alert("Please log in to save your workout!");
@@ -100,7 +124,7 @@ export default function workout() {
           </View>
           
           {workoutExercises.length > 0 && (
-            <TouchableOpacity className="bg-green-600 px-3 py-2 rounded-2xl flex-row items-center" onPress={saveWorkout}>
+            <TouchableOpacity disabled={!workoutValidator()} className="bg-green-600 px-3 py-2 rounded-2xl flex-row items-center" onPress={saveWorkout}>
               <Check color="white" className="w-4 h-4 mr-1" />
               <Text className="text-white font-semibold text-sm"> Save</Text>
             </TouchableOpacity>
@@ -161,6 +185,7 @@ export default function workout() {
                   style={{ width: 140, height: 50, marginRight: 17 }} 
                   value={set.reps}
                   onChangeText = {text => {
+                    if (!/^\d*$/.test(text)) return;
                     const newExercises = [...workoutExercises];
                     newExercises[index].sets[setIndex].reps = text;
                     setWorkoutExercises(newExercises);
@@ -195,6 +220,8 @@ export default function workout() {
                   value = {set.weight}
                   onChangeText = {
                     text => {
+                      if (!/^\d*$/.test(text)) return;
+
                       const newExercises = [...workoutExercises];
                       newExercises[index].sets[setIndex].weight = text;
                       setWorkoutExercises(newExercises);
