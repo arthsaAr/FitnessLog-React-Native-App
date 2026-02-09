@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
-import { Calendar, Clock, Dumbbell, Plus } from "lucide-react-native";
+import { Clock, Dumbbell, Plus } from "lucide-react-native";
 import React from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 
@@ -19,8 +19,8 @@ export default function Index() {
 
     <View className="flex-row gap-3">
       <View 
-        className="flex-1 bg-[#1e1e1e] rounded-xl p-4 mb-3"
-        style={{borderWidth: 1, borderColor: '#374151'}}
+        className="flex-1 bg-[#1e1e1e] rounded-xl p-4 mb-3 justify-center"
+        style={{borderWidth: 1, borderColor: '#374151', height: 175}}
       >
         <View
           className="self-start"
@@ -30,7 +30,7 @@ export default function Index() {
             padding:8,
           }}
         >
-          <Dumbbell color="green" size={22} />
+          <Dumbbell color="green" size={28} />
         </View>
         <Text className="text-white pt-2 text-semibold text-3xl">
           23
@@ -41,7 +41,7 @@ export default function Index() {
       </View>
 
       <View 
-        className="flex-1 bg-[#1e1e1e] rounded-xl p-4 mb-3"
+        className="flex-1 bg-[#1e1e1e] rounded-xl p-4 mb-3 justify-center"
         style={{borderWidth: 1, borderColor: '#374151'}}
       >
         <View 
@@ -51,9 +51,9 @@ export default function Index() {
           borderRadius:999,
           padding:8,
         }}>
-          <Clock color="#3B82F6" size={22} />
+          <Clock color="#3B82F6" size={28} />
         </View>
-        <Text className="text-white pt-2 text-semibold text-xl">
+        <Text className="text-white pt-2 text-semibold text-2xl">
           Today
         </Text>
         <Text className="text-gray-300 text-lg">
@@ -92,16 +92,16 @@ export default function Index() {
       </LinearGradient>
     </TouchableOpacity>
 
-    {/* Recent Workouts */}
-    <View className="flex-row gap-5 justify-between items-center mt-4">
+    {/* Recent Workouts (HIDING THIS PANEL, TO BE IMPLEMENTED LATER) */}
+    {/* <View className="flex-row gap-5 justify-between items-center mt-4">
       <Text className="text-white text-lg">Recent Workouts</Text>
       <TouchableOpacity 
         onPress={() => router.push('/history')}>
         <Text className="text-green-400 text-lg">View All</Text>
       </TouchableOpacity>
-    </View>
+    </View> */}
 
-    <View 
+    {/* <View 
       className="flex-1 gap-1 justify-center bg-[#1e1e1e] rounded-xl p-4 mt-3"
       style={{borderWidth: 1, borderColor: '#374151'}}
     >
@@ -123,8 +123,8 @@ export default function Index() {
         exercises
           </Text>
       </View>
-        
-    </View>
+    </View> */}
+
     <View 
       className="items-center justify-center bg-[#1e1e1e] rounded-xl p-4 mt-5"
       style={{borderWidth: 1, borderColor: '#374151'}}
