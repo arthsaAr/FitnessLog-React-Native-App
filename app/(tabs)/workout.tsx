@@ -119,8 +119,8 @@ export default function workout() {
       >
         <View className="flex-row justify-between items-center mb-4 px-1">
           <View>
-            <Text className="text-white text-3xl font-bold mb-1">Log Workout</Text>
-            <Text className="text-secondary text-xl font-semibold mb-4">Today · {formateDate}</Text>
+            <Text className="text-white text-3xl font-semibold mb-1">Log Workout</Text>
+            <Text className="text-secondary text-xl font-normal mb-4">Today · {formateDate}</Text>
           </View>
           
           {workoutExercises.length > 0 && (

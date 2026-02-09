@@ -1,4 +1,4 @@
-import { Calendar, ChevronRight, Dumbbell } from 'lucide-react-native';
+import { ChevronRight, Dumbbell } from 'lucide-react-native';
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
@@ -8,8 +8,8 @@ const history = () => {
       <ScrollView>
       <View className="flex-row justify-between items-center mb-4 px-1">
         <View>
-          <Text className="text-white text-3xl font-bold mb-1">Workout History</Text>
-          <Text className="text-secondary text-xl font-semibold mb-4">View your past workout sessions</Text>
+          <Text className="text-white text-3xl font-semibold mb-1">Workout History</Text>
+          <Text className="text-secondary text-xl font-normal mb-4">View your past workout sessions</Text>
         </View>
       </View>
 
@@ -17,8 +17,8 @@ const history = () => {
           style={{borderWidth: 1, borderColor: '#374151'}}>
             
             {/* first row today and right arrow*/}
-          <View className='flex-row justify-between items-center mb-3'>
-            <Text className=' text-white text-xl'>Today</Text>
+          <View className='flex-row justify-between items-center mb-1'>
+            <Text className=' text-white text-2xl'>Today</Text>
             <ChevronRight color="white"/>
           </View>
 
@@ -27,11 +27,6 @@ const history = () => {
             <View className='flex-row items-center '>
               <Dumbbell color="white" size={18}/>
               <Text className='text-gray-400 ml-1'> 3 exercises</Text>
-            </View>
-          
-            <View className='flex-row items-center '>
-              <Calendar color="white" size={18}/>
-              <Text className='text-gray-400 ml-1'> 45 minutes</Text>
             </View>
           </View>
 

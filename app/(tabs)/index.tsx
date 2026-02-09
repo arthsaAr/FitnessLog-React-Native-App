@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
-import { Clock, Dumbbell, Plus } from "lucide-react-native";
+import { Calendar, Clock, Dumbbell, Plus } from "lucide-react-native";
 import React from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 
@@ -106,20 +106,21 @@ export default function Index() {
       style={{borderWidth: 1, borderColor: '#374151'}}
     >
       <View className="flex-row justify-between items-center">
-        <Text className="text-white text-md">
+        <Text className="text-white text-xl">
         Chest & Triceps
           </Text>
-          <Text className="text-green-400 text-md">
-        45 min
+          <Text className="text-green-400 text-xl">
+        5
           </Text>
       </View>
 
       <View className="flex-row justify-between items-center">
-        <Text className="text-gray-400 text-sm">
-        Today
+        
+        <Text className="text-gray-400 text-l">
+        <Calendar size={13} color="gray"/> Today
           </Text>
-          <Text className="text-gray-400 text-sm">
-        12 sets
+          <Text className="text-gray-400 text-l">
+        exercises
           </Text>
       </View>
         
