@@ -36,19 +36,8 @@ const history = () => {
           {/* adding dummy exercises for now*/}
           <View className='flex-row justify-between mt-1'>
             <Text className='text-white text-lg'>Bench Press</Text>
-            <Text className='text-gray-400 text-lg'>4 × 10 @ 185lb</Text>
+            <Text className='text-gray-400 text-lg'>4 × 10 @ 185lb</Text> 
           </View>
-
-          {/* <View className='flex-row justify-between ml-2 mr-2 mb-2 mt-1'>
-            <Text className='text-white'>Incline Dumbell Press</Text>
-            <Text className='text-gray-400'>3 × 12 @ 70lb</Text>
-          </View>
-
-          <View className='flex-row justify-between ml-2 mr-2 mb-2 mt-1'>
-            <Text className='text-white'>Squats</Text>
-            <Text className='text-gray-400'>4 × 11 @ 135lb</Text>
-          </View> */}
-
         </View>
       </ScrollView>
       

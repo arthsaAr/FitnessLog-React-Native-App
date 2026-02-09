@@ -150,17 +150,6 @@ export default function profile() {
               </View>
           </View>
 
-          {/**Hiding from UI (to be implemented) */}
-          {/* <View 
-            className='bg-[#1e1e1e] rounded-xl mb-3'
-            style={{borderWidth: 1, borderColor: '#374151'}}>
-            <TouchableOpacity 
-                className='flex-row p-2'>
-              <Settings size={20} color="#ffffff"/>
-              <Text className='text-white text-lg'> Settings</Text>
-            </TouchableOpacity>
-          </View> */}
-
           <View 
             className='bg-[#1e1e1e] rounded-xl mb-3'
             style={{borderWidth: 1, borderColor: '#374151'}}>

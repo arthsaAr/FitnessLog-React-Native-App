@@ -92,39 +92,6 @@ export default function Index() {
       </LinearGradient>
     </TouchableOpacity>
 
-    {/* Recent Workouts (HIDING THIS PANEL, TO BE IMPLEMENTED LATER) */}
-    {/* <View className="flex-row gap-5 justify-between items-center mt-4">
-      <Text className="text-white text-lg">Recent Workouts</Text>
-      <TouchableOpacity 
-        onPress={() => router.push('/history')}>
-        <Text className="text-green-400 text-lg">View All</Text>
-      </TouchableOpacity>
-    </View> */}
-
-    {/* <View 
-      className="flex-1 gap-1 justify-center bg-[#1e1e1e] rounded-xl p-4 mt-3"
-      style={{borderWidth: 1, borderColor: '#374151'}}
-    >
-      <View className="flex-row justify-between items-center">
-        <Text className="text-white text-xl">
-        Chest & Triceps
-          </Text>
-          <Text className="text-green-400 text-xl">
-        5
-          </Text>
-      </View>
-
-      <View className="flex-row justify-between items-center">
-        
-        <Text className="text-gray-400 text-l">
-        <Calendar size={13} color="gray"/> Today
-          </Text>
-          <Text className="text-gray-400 text-l">
-        exercises
-          </Text>
-      </View>
-    </View> */}
-
     <View 
       className="items-center justify-center bg-[#1e1e1e] rounded-xl p-4 mt-5"
       style={{borderWidth: 1, borderColor: '#374151'}}
