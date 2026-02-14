@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
-import { Clock, Dumbbell, Plus } from "lucide-react-native";
+import { Calendar, ChevronRight, Clock, Dumbbell, Plus } from "lucide-react-native";
 import React from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 
@@ -91,6 +91,40 @@ export default function Index() {
       </View>
       </LinearGradient>
     </TouchableOpacity>
+
+     {/* Recent Workouts (HIDING THIS PANEL, TO BE IMPLEMENTED LATER) */}
+    <View className="flex-row gap-5 justify-between items-center mt-4">
+      <Text className="text-white text-lg">Recent Workouts</Text>
+      <TouchableOpacity 
+        onPress={() => router.push('/history')}>
+        <Text className="text-green-400 text-lg">View All</Text>
+      </TouchableOpacity>
+    </View> 
+
+     <View 
+      className="bg-[#1e1e1e] rounded-xl p-4 mt-3"
+      style={{borderWidth: 1, borderColor: '#374151'}}
+    >
+        <View className="flex-row justify-between items-center">
+          <View className="flex-row items-center">
+            <View
+              className="self-start"
+              style={{
+                backgroundColor: 'rgba(34,197,94,0.15)',
+                borderRadius:999,
+                padding:8,
+              }}
+            >
+              <Calendar color="#22C55E" size={25} />
+            </View>
+            <View className="ml-1">
+              <Text className="text-white text-xl">Today</Text>
+              <Text className="text-gray-500 text-lg">3 exercises</Text>
+            </View>
+          </View>
+          <ChevronRight color="gray"/>
+        </View>
+    </View>
 
     <View 
       className="items-center justify-center bg-[#1e1e1e] rounded-xl p-4 mt-5"
