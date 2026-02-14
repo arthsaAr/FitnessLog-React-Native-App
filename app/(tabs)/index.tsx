@@ -92,7 +92,7 @@ export default function Index() {
       </LinearGradient>
     </TouchableOpacity>
 
-     {/* Recent Workouts (HIDING THIS PANEL, TO BE IMPLEMENTED LATER) */}
+     {/* Recent Workouts */}
     <View className="flex-row gap-5 justify-between items-center mt-4">
       <Text className="text-white text-lg">Recent Workouts</Text>
       <TouchableOpacity 
