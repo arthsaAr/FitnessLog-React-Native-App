@@ -1,5 +1,5 @@
 import { getAuth } from 'firebase/auth';
-import { doc, getDoc, getFirestore } from 'firebase/firestore';
+import { doc, getFirestore, onSnapshot } from 'firebase/firestore';
 import { ChevronRight, Dumbbell } from 'lucide-react-native';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
@@ -12,23 +12,42 @@ const history = () => {
   const [sessions, setSessions] = useState<any[]>([]);
 
   //fetching the data
+  // useEffect(() => {
+  //   const fetchWorkouts = async () => {
+  //     const user = auth.currentUser;
+  //     if(!user){
+  //       return;
+  //     }
+
+  //     const docRef = doc(db, "workouts", user.uid);
+  //     const docSnap = await getDoc(docRef);
+
+  //     if(docSnap.exists()){
+  //       const data = docSnap.data();
+  //       setSessions(data.sessions || []);
+  //     }
+  //   };
+  //   fetchWorkouts();
+  // }, []);
+
   useEffect(() => {
-    const fetchWorkouts = async () => {
-      const user = auth.currentUser;
-      if(!user){
-        return;
-      }
+    const user = auth.currentUser;
+    if(!user){
+      return;
+    }
 
-      const docRef = doc(db, "workouts", user.uid);
-      const docSnap = await getDoc(docRef);
-
+    const docRef = doc(db, "workouts", user.uid);
+    const theUpdates = onSnapshot(docRef, (docSnap) => {
       if(docSnap.exists()){
         const data = docSnap.data();
         setSessions(data.sessions || []);
+      }else {
+        setSessions([]);
       }
-    };
-    fetchWorkouts();
+    });
+    return () => theUpdates();
   }, []);
+
 
   return (
     <View className='flex-1 bg-primary px-4 pt-12'>
