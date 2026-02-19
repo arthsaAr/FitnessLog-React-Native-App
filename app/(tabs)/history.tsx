@@ -1,8 +1,8 @@
 import { getAuth } from 'firebase/auth';
 import { doc, getFirestore, onSnapshot } from 'firebase/firestore';
-import { ChevronRight, Dumbbell } from 'lucide-react-native';
+import { ChevronRight, Dumbbell, Trash2 } from 'lucide-react-native';
 import React, { useEffect, useState } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
 const history = () => {
   const db = getFirestore();
@@ -48,6 +48,26 @@ const history = () => {
     return () => theUpdates();
   }, []);
 
+  // const deleteSession = async (sessionIndex: number) => {
+  //   const user = auth.currentUser;
+  //   if(!user){
+  //     return;
+  //   }
+
+  //   const docRef = doc(db, "workouts", user.uid);
+
+  //   try {
+  //     const updatedSessions = sessions.filter(
+  //       (_, index) => index !== sessionIndex
+  //     );
+
+  //     await updateDoc(docRef, {
+
+  //     })
+  //   }
+
+  // }
+
 
   return (
     <View className='flex-1 bg-primary px-4 pt-12'>
@@ -85,6 +105,12 @@ const history = () => {
                       <Dumbbell color="white" size={18}/>
                       <Text className='text-gray-400 ml-1'> {sessions.exercises.length} exercises</Text>
                     </View>
+                    <TouchableOpacity
+                    >
+                      <View>
+                        <Trash2 color="green" size={20}/>
+                      </View>
+                    </TouchableOpacity>
                   </View>
 
                   {/*making a divider line */}
@@ -97,9 +123,9 @@ const history = () => {
 
                     return (
                       <View key={i} className='flex-row justify-between mt-1'>
-                    <Text className='text-white text-lg'>{exercises.name}</Text>
-                    <Text className='text-gray-400 text-lg'>{totalSets} × {firstSet.reps} @ {firstSet.weight}</Text> 
-                  </View>
+                        <Text className='text-white text-lg'>{exercises.name}</Text>
+                        <Text className='text-gray-400 text-lg'>{totalSets} × {firstSet.reps} @ {firstSet.weight}</Text> 
+                      </View>
                     )
                   })
                   }
