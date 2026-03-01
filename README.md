@@ -7,7 +7,7 @@ FitnessTracker is a React Native (Expo) mobile application focused on **workout 
 This project is currently in the **development phase**, and features, UI, and architecture are subject to change as development continues.
 
  **Development started:** November 11, 2025  
- **Development status:** Ongoing
+ **Development status:** Ongoing (Completion soon!)
 
 ## 📱 App Screens
 
