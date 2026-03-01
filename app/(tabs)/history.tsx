@@ -67,7 +67,10 @@ const history = () => {
             </Text>
           </View>
         ) : (
-            sessions.map((sessions, index) => (
+            // sessions.map((sessions, index) => (  (this makes normal old to new vertically ordering)
+            //using just reverse changes the original array.
+            
+            [...sessions].reverse().map((sessions, index) =>(
                 <View key={index} className='bg-[#1e1e1e] rounded-xl mb-3 p-4'
                   style={{borderWidth: 1, borderColor: '#374151'}}>
                     
@@ -102,7 +105,8 @@ const history = () => {
                     return (
                       <View key={i} className='flex-row justify-between mt-1'>
                         <Text className='text-white text-lg'>{exercises.name}</Text>
-                        <Text className='text-gray-400 text-lg'>{totalSets} × {firstSet.reps} @ {firstSet.weight}</Text> 
+                        <Text className='text-gray-400 text-lg'>{totalSets} × {firstSet.reps} @ {firstSet.weight}lbs</Text> 
+                        
                       </View>
                     )
                   })
