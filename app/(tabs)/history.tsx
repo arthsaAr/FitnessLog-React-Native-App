@@ -1,6 +1,6 @@
 import { getAuth } from 'firebase/auth';
 import { doc, getFirestore, onSnapshot } from 'firebase/firestore';
-import { ChevronRight, Dumbbell, Trash2 } from 'lucide-react-native';
+import { ChevronRight, Dumbbell } from 'lucide-react-native';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
@@ -83,14 +83,14 @@ const history = () => {
                   {/* second row with dumbbell and exercise */}
                   <View className='justify-between flex-row mb-3'>
                     <View className='flex-row items-center '>
-                      <Dumbbell color="white" size={18}/>
+                      <Dumbbell color="white" size={10}/>
                       <Text className='text-gray-400 ml-1'> {sessions.exercises.length} exercises</Text>
                     </View>
                     <TouchableOpacity
                     >
-                      <View>
+                      {/* <View>
                         <Trash2 color="green" size={20}/>
-                      </View>
+                      </View> */}
                     </TouchableOpacity>
                   </View>
 
@@ -103,9 +103,15 @@ const history = () => {
                     const firstSet = exercises.sets[0];
 
                     return (
-                      <View key={i} className='flex-row justify-between mt-1'>
-                        <Text className='text-white text-lg'>{exercises.name}</Text>
-                        <Text className='text-gray-400 text-lg'>{totalSets} × {firstSet.reps} @ {firstSet.weight}lbs</Text> 
+                      <View key={i}>
+                        <View className='flex-row justify-between mt-1'>
+                          <Text className='text-white text-lg'>{exercises.name}</Text>
+                          <Text className='text-gray-400 text-lg'>{totalSets} × {firstSet.reps} @ {firstSet.weight}lbs</Text> 
+                        </View>
+
+                        {i !== sessions.exercises.length - 1 && (
+                          <View className='h-1 bg-gray-700 my-2 opacity-40'  />
+                        )}
                         
                       </View>
                     )
