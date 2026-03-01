@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import { getAuth } from 'firebase/auth';
 import { doc, getFirestore, onSnapshot } from 'firebase/firestore';
 import { ChevronRight, Dumbbell } from 'lucide-react-native';
@@ -7,6 +8,7 @@ import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 const history = () => {
   const db = getFirestore();
   const auth = getAuth();
+  const navigation = useNavigation();
 
   //state to store the session
   const [sessions, setSessions] = useState<any[]>([]);
@@ -77,7 +79,9 @@ const history = () => {
                     {/* first row today and right arrow*/}
                   <View className='flex-row justify-between items-center mb-1'>
                     <Text className=' text-white text-2xl'>{formatDate(sessions.date)}</Text>
-                    <ChevronRight color="white"/>
+                    <TouchableOpacity onPress={() => navigation.navigate('workoutDetails', { sessions })}>
+                      <ChevronRight color="white"/>
+                    </TouchableOpacity>
                   </View>
 
                   {/* second row with dumbbell and exercise */}
@@ -86,12 +90,12 @@ const history = () => {
                       <Dumbbell color="white" size={10}/>
                       <Text className='text-gray-400 ml-1'> {sessions.exercises.length} exercises</Text>
                     </View>
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                     >
-                      {/* <View>
+                      <View>
                         <Trash2 color="green" size={20}/>
-                      </View> */}
-                    </TouchableOpacity>
+                      </View>
+                    </TouchableOpacity> */}
                   </View>
 
                   {/*making a divider line */}
@@ -114,7 +118,7 @@ const history = () => {
                         )}
                         
                       </View>
-                    )
+                    );
                   })
                   }
                 </View>
