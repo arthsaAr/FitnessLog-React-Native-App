@@ -11,25 +11,6 @@ const history = () => {
   //state to store the session
   const [sessions, setSessions] = useState<any[]>([]);
 
-  //fetching the data
-  // useEffect(() => {
-  //   const fetchWorkouts = async () => {
-  //     const user = auth.currentUser;
-  //     if(!user){
-  //       return;
-  //     }
-
-  //     const docRef = doc(db, "workouts", user.uid);
-  //     const docSnap = await getDoc(docRef);
-
-  //     if(docSnap.exists()){
-  //       const data = docSnap.data();
-  //       setSessions(data.sessions || []);
-  //     }
-  //   };
-  //   fetchWorkouts();
-  // }, []);
-
   useEffect(() => {
     const user = auth.currentUser;
     if(!user){
@@ -48,26 +29,23 @@ const history = () => {
     return () => theUpdates();
   }, []);
 
-  // const deleteSession = async (sessionIndex: number) => {
-  //   const user = auth.currentUser;
-  //   if(!user){
-  //     return;
-  //   }
 
-  //   const docRef = doc(db, "workouts", user.uid);
+  //changing the format of dates from 6/2/2026 to actual Sun, Jan 5 type
+  const formatDate = (dateString: string) => {
+    const [day, month, year] = dateString.split('/');
 
-  //   try {
-  //     const updatedSessions = sessions.filter(
-  //       (_, index) => index !== sessionIndex
-  //     );
+    const date = new Date(
+      Number(year),
+      Number(month) - 1,
+      Number(day)
+    );
 
-  //     await updateDoc(docRef, {
-
-  //     })
-  //   }
-
-  // }
-
+    return date.toLocaleDateString('en-US', {
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric',
+    });
+  };
 
   return (
     <View className='flex-1 bg-primary px-4 pt-12'>
@@ -95,7 +73,7 @@ const history = () => {
                     
                     {/* first row today and right arrow*/}
                   <View className='flex-row justify-between items-center mb-1'>
-                    <Text className=' text-white text-2xl'>{sessions.date}</Text>
+                    <Text className=' text-white text-2xl'>{formatDate(sessions.date)}</Text>
                     <ChevronRight color="white"/>
                   </View>
 
