@@ -1,6 +1,6 @@
 # FitnessTracker (Expo App)
 
- **Status: Under Active Development** 
+ **Status: Under Active Development (Completion soon!)** 
 
 FitnessTracker is a React Native (Expo) mobile application focused on **workout logging and progress tracking** for gym-goers. The app is being actively developed with an emphasis on clean UI, flexible workout tracking, and long-term scalability.
 
