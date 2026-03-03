@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { Calendar, ChevronRight, Clock, Dumbbell, Plus } from "lucide-react-native";
@@ -6,6 +7,7 @@ import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 export default function Index() {
     const router = useRouter();
+    const navigation = useNavigation();
 
   return (
     <View className='flex-1 bg-primary px-4 pt-12'>
@@ -40,7 +42,8 @@ export default function Index() {
         </Text>
       </View>
 
-      <View 
+      
+      <View
         className="flex-1 bg-[#1e1e1e] rounded-xl p-4 mb-3 justify-center"
         style={{borderWidth: 1, borderColor: '#374151'}}
       >
@@ -59,7 +62,7 @@ export default function Index() {
         <Text className="text-gray-300 text-lg">
         Last Workout
         </Text>
-      </View>
+        </View>
     </View>
 
     {/**The new workout button! */}
@@ -101,9 +104,10 @@ export default function Index() {
       </TouchableOpacity>
     </View> 
 
-     <View 
+     <TouchableOpacity 
       className="bg-[#1e1e1e] rounded-xl p-4 mt-3"
       style={{borderWidth: 1, borderColor: '#374151'}}
+      onPress={() => navigation.navigate('workoutDetails')}   //no session for now, needs to be implemented!
     >
         <View className="flex-row justify-between items-center">
           <View className="flex-row items-center">
@@ -124,7 +128,7 @@ export default function Index() {
           </View>
           <ChevronRight color="gray"/>
         </View>
-    </View>
+    </TouchableOpacity>
 
     <View 
       className="items-center justify-center bg-[#1e1e1e] rounded-xl p-4 mt-5"
