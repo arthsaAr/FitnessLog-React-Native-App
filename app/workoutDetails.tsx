@@ -75,7 +75,7 @@ export default function workoutDetails() {
       day: 'numeric',
     });
   };
-  
+
   return (
     <View className='flex-1 bg-primary px-4 pt-12'>
       <TouchableOpacity
@@ -112,51 +112,36 @@ export default function workoutDetails() {
         Exercises
       </Text>
       
-      <View className='bg-[#1e1e1e] rounded-xl mb-3 p-3'
-        style={{borderWidth: 1, borderColor: '#374151'}}>
-          <Text className="text-white text-xl font-normal mb-1">
-          Bench Press
-        </Text>
-        <View className="flex-row gap-2">
-            <View className="flex-row gap-1">
-              <Text className="text-green-500 text-nm">4</Text>
-              <Text className="text-gray-500 text-nm">sets</Text>
-            </View>
+    {/**View inside a .map needs a key for that view...! */}
+      {session.exercises.map((exercise: any, index: number) => {
+        const firstSet = exercise.sets[0];
+        const totalSets = exercise.sets.length;
 
-            <View className="flex-row gap-1">
-              <Text className="text-green-500 text-nm">10</Text>
-              <Text className="text-gray-500 text-nm">reps</Text>
-            </View>
+        return (
+          <View key={index} className='bg-[#1e1e1e] rounded-xl mb-3 p-3'
+            style={{borderWidth: 1, borderColor: '#374151'}}>
+              <Text className="text-white text-xl font-normal mb-1">
+                {exercise.name}
+              </Text>
+            <View className="flex-row gap-2">
+                <View className="flex-row gap-1">
+                  <Text className="text-green-500 text-nm">{totalSets}</Text>
+                  <Text className="text-gray-500 text-nm">sets</Text>
+                </View>
 
-            <View className="flex-row gap-1">
-              <Text className="text-green-500 text-nm">185</Text>
-              <Text className="text-gray-500 text-nm">lbs</Text>
-            </View>
+                <View className="flex-row gap-1">
+                  <Text className="text-green-500 text-nm">{firstSet.reps}</Text>
+                  <Text className="text-gray-500 text-nm">reps</Text>
+                </View>
+
+                <View className="flex-row gap-1">
+                  <Text className="text-green-500 text-nm">{firstSet.weight}</Text>
+                  <Text className="text-gray-500 text-nm">lbs</Text>
+                </View>
+              </View>
           </View>
-      </View>
-
-      <View className='bg-[#1e1e1e] rounded-xl mb-3 p-3'
-        style={{borderWidth: 1, borderColor: '#374151'}}>
-          <Text className="text-white text-xl font-normal mb-1">
-          DeadLift
-        </Text>
-        <View className="flex-row gap-2">
-            <View className="flex-row gap-1">
-              <Text className="text-green-500 text-nm">4</Text>
-              <Text className="text-gray-500 text-nm">sets</Text>
-            </View>
-
-            <View className="flex-row gap-1">
-              <Text className="text-green-500 text-nm">10</Text>
-              <Text className="text-gray-500 text-nm">reps</Text>
-            </View>
-
-            <View className="flex-row gap-1">
-              <Text className="text-green-500 text-nm">185</Text>
-              <Text className="text-gray-500 text-nm">lbs</Text>
-            </View>
-          </View>
-      </View>
+        );
+      })}
 
       <View className='bg-[#1e1e1e] rounded-xl mt-3 mb-3 p-3'
         style={{borderWidth: 1, borderColor: '#374151'}}>
