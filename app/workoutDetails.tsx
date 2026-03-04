@@ -76,6 +76,19 @@ export default function workoutDetails() {
     });
   };
 
+  let totalSets = 0;
+  let totalReps = 0;
+  let totalWeight = 0;
+
+  //adding reps, weights, sets for summary section
+  for(let exercise of session.exercises){
+    totalSets = totalSets+exercise.sets.length;
+    for(let set of exercise.sets){
+      totalReps = totalReps + Number(set.reps);
+      totalWeight = totalWeight + Number(set.reps) * Number(set.weight);
+    }
+  }
+
   return (
     <View className='flex-1 bg-primary px-4 pt-12'>
       <TouchableOpacity
@@ -150,17 +163,17 @@ export default function workoutDetails() {
         </Text>
         <View className="flex-row justify-between gap-2 p-6">
             <View className="flex-col gap-1 items-center">
-              <Text className="text-green-500 text-2xl">10</Text>
+              <Text className="text-green-500 text-2xl">{totalSets}</Text>
               <Text className="text-gray-500 text-lg">Total Sets</Text>
             </View>
 
             <View className="flex-col gap-1 items-center">
-              <Text className="text-green-500 text-2xl">121</Text>
+              <Text className="text-green-500 text-2xl">{totalReps}</Text>
               <Text className="text-gray-500 text-lg">Total Reps</Text>
             </View>
 
             <View className="flex-col gap-1 items-center">
-              <Text className="text-green-500 text-2xl">1,100</Text>
+              <Text className="text-green-500 text-2xl">{totalWeight}</Text>
               <Text className="text-gray-500 text-lg">Total lbs</Text>
             </View>
           </View>
