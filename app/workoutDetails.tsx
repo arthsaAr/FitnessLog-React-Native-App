@@ -1,5 +1,7 @@
 import { useRoute } from "@react-navigation/native";
 import { useRouter } from "expo-router";
+import { getAuth } from "firebase/auth";
+import { doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import { ArrowLeft, Dumbbell, SquarePen, Trash2 } from "lucide-react-native";
 import { Text, TouchableOpacity, View } from "react-native";
 
@@ -9,6 +11,54 @@ export default function workoutDetails() {
   const route = useRoute();
   const { session } = route.params as { session: any };   //getting specific workout/session
   
+  const db = getFirestore();
+  const auth = getAuth();
+
+  const handleWorkoutDeletion = async () => {
+    const user = auth.currentUser;
+    if(!user){
+      return;
+    }
+
+    try {
+      const userDocRef = doc(db, "workouts", user.uid);
+
+      const docSnap = await getDoc(userDocRef);
+
+      if(!docSnap.exists()){
+        return;
+      }
+
+      const data = docSnap.data();
+      const currentSessions = data.sessions || [];
+
+      //removing that specific workout
+      
+      //this was based on id but we dont have id included in session
+      // const updated = currentSessions.filter(
+      //   (s: any) => s.id!== session.id
+      // );
+
+      //matching date and specific exercise name
+      const updated = currentSessions.filter(
+        (s: any) => !(
+          s.date === session.date &&
+          JSON.stringify(s.exercises) === JSON.stringify(session.exercises)
+        )
+      );
+
+      await updateDoc(userDocRef, {
+        sessions: updated,
+      });
+
+      router.back();    //goes 1 step back to main screen
+    } catch(error){
+      console.log("Delete error: ", error);
+    }
+  };
+
+
+
   //changing the format of dates from 6/2/2026 to actual Sun, Jan 5 type
   const formatDate = (dateString: string) => {
     const [day, month, year] = dateString.split('/');
@@ -25,7 +75,7 @@ export default function workoutDetails() {
       day: 'numeric',
     });
   };
-
+  console.log("Clicked session:", session);
   return (
     <View className='flex-1 bg-primary px-4 pt-12'>
       <TouchableOpacity
@@ -52,6 +102,7 @@ export default function workoutDetails() {
           <Text className='text-white font-semibold text-lg'>Edit Workout</Text>
         </TouchableOpacity>
         <TouchableOpacity 
+          onPress={handleWorkoutDeletion}
           className='bg-white gap-2 rounded-lg py-3 px-4 flex-row items-center justify-center mb-6 border border-red-500'>
           <Trash2 color="red" />
         </TouchableOpacity>
