@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import { ArrowLeft, Dumbbell } from "lucide-react-native";
+import { ArrowLeft, Dumbbell, SquarePen, Trash2 } from "lucide-react-native";
 import { Text, TouchableOpacity, View } from "react-native";
 
 //the order of stack screen determines what is shown first and what is shown second!
@@ -24,6 +24,20 @@ export default function workoutDetails() {
         <Text className="text-gray-400 text-lg font-normal mb-4">3 exercises completed</Text>
       </View>
 
+      {/**Button row! */}
+      <View className="flex-row gap-2 justify-center">
+        <TouchableOpacity 
+          className='bg-[#030213] flex-1 gap-2 rounded-lg py-3 px-4 flex-row items-center justify-center mb-6'>
+          <SquarePen className="w-5 h-5 mr-2" color="white" />
+          <Text className='text-white font-semibold text-lg'>Edit Workout</Text>
+        </TouchableOpacity>
+        <TouchableOpacity 
+          className='bg-white gap-2 rounded-lg py-3 px-4 flex-row items-center justify-center mb-6'>
+          <Trash2 color="red" />
+        </TouchableOpacity>
+      </View>
+
+      
 
 
     </View>
