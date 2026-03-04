@@ -17,15 +17,12 @@ This project is currently in the **development phase**, and features, UI, and ar
   <img src="assets/prototype/workout.png" width="200" />
   <img src="assets/prototype/workoutComplete.png" width="200" />
 </p>
-
 <p align="center">
   <img src="assets/prototype/history.png" width="200" />
   <img src="assets/prototype/workoutDetails.png" width="200" />
   <img src="assets/prototype/profile.png" width="200" />
   <img src="assets/prototype/editProfile.png" width="200" />
 </p>
-
-Some designs are changed, New designs will be updated soon!
 
 ---
 
