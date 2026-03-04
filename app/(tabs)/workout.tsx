@@ -89,6 +89,7 @@ export default function workout() {
       
       //here each workout is a object with date and exercises
       const workoutData =  {
+      id: Date.now().toString(),    //for better workout detection and handlign
       date: todayIs,
       exercises: workoutExercises
       };
@@ -103,7 +104,7 @@ export default function workout() {
 
     //for UI changes
     setSaved(true);
-    alert("Workour saved to Firebase!");
+    alert("Workout Saved!");
     } catch(e){
       console.log("Error saving workout:", e);
       alert("Failed to save workout.");

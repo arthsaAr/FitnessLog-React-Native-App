@@ -50,7 +50,7 @@ export default function workoutDetails() {
       await updateDoc(userDocRef, {
         sessions: updated,
       });
-
+      alert("Workout Deleted!");
       router.back();    //goes 1 step back to main screen
     } catch(error){
       console.log("Delete error: ", error);
