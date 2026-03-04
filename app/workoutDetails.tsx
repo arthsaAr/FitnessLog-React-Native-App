@@ -35,17 +35,17 @@ export default function workoutDetails() {
       //removing that specific workout
       
       //this was based on id but we dont have id included in session
-      // const updated = currentSessions.filter(
-      //   (s: any) => s.id!== session.id
-      // );
+      const updated = currentSessions.filter(
+        (s: any) => s.id!== session.id
+      );
 
       //matching date and specific exercise name
-      const updated = currentSessions.filter(
-        (s: any) => !(
-          s.date === session.date &&
-          JSON.stringify(s.exercises) === JSON.stringify(session.exercises)
-        )
-      );
+      // const updated = currentSessions.filter(
+      //   (s: any) => !(
+      //     s.date === session.date &&
+      //     JSON.stringify(s.exercises) === JSON.stringify(session.exercises)
+      //   )
+      // );
 
       await updateDoc(userDocRef, {
         sessions: updated,
@@ -75,7 +75,7 @@ export default function workoutDetails() {
       day: 'numeric',
     });
   };
-  console.log("Clicked session:", session);
+  
   return (
     <View className='flex-1 bg-primary px-4 pt-12'>
       <TouchableOpacity
