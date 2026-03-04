@@ -1,6 +1,6 @@
 import { useFocusEffect } from 'expo-router';
 import { getAuth } from 'firebase/auth';
-import { arrayUnion, doc, getFirestore, setDoc } from 'firebase/firestore';
+import { arrayUnion, doc, getDoc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 import { Check, ChevronLeft, Minus, Plus, Search, Trophy } from 'lucide-react-native';
 import React, { useCallback, useState } from 'react';
 import { Alert, Dimensions, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
@@ -41,14 +41,31 @@ export default function workout() {
   {/**when leaving the workout screen, reseting the exercise panel, clearing search, and reseting the state */}
   useFocusEffect(
     useCallback(() => {
+      const checkIfSavedToday = async () => {
+        if(!user){
+          return;
+        }
+        const workoutRef = doc(db, "workouts", user.uid);
+        const workoutSnap = await getDoc(workoutRef);
+
+        if(workoutSnap.exists()){
+          const sessions = workoutSnap.data().sessions || [];
+          const alreadySavedToday = sessions.some(s => s.date === formateDate);
+          if(alreadySavedToday){
+            setSaved(true);
+          }
+        }
+      };
+
+      checkIfSavedToday();
       
       return () => {
         setShowPanel(false);
         setSearchQuery('');
         setWorkoutExercises([]);
-        setSaved(false);
+        // setSaved(false);
       };
-    }, [])
+    }, [user])
   );
 
   const workoutValidator = () => {
@@ -291,7 +308,6 @@ export default function workout() {
       </ScrollView>
       ) : (
         <View className="flex-1 justify-center items-center">
-
           {/**for making a circle background we wrap the circle and the trophy inside a view */}
           <View
             style={{
@@ -314,10 +330,29 @@ export default function workout() {
           <View>
             <TouchableOpacity 
               onPress={() => {
-                Alert.alert('Replace workout?', 'Your previous workout will be replaced. Do you want to conitnue?', [
+                Alert.alert('Log Another Workout', 'Do you want to replace today\'s workout or log a new session?', [
                   {
-                    text: 'Yes',
+                    text: 'Replace',
                     style: 'destructive',
+                    onPress: async () => {
+                      const userDocRef = doc(db, "workouts", user!.uid);
+                      const workoutSnap = await getDoc(userDocRef);
+                      if(workoutSnap.exists()){
+                        const updated = workoutSnap.data().sessions.filter(s => s.date !== formateDate);
+                        await updateDoc(userDocRef, {
+                          sessions: updated
+                        });
+                      }
+
+                      setSaved(false);
+                      setWorkoutExercises([]);
+                      setSearchQuery('');
+                      setShowPanel(false);
+                    },
+                  },
+                  {
+                    text: 'Log New Session',
+                    style: 'default',
                     onPress: () => {
                       setSaved(false);
                       setWorkoutExercises([]);
@@ -326,7 +361,7 @@ export default function workout() {
                     },
                   },
                   {
-                    text: 'No',
+                    text: 'Cancel',            
                     style: 'cancel',
                   },
                 ]);
