@@ -72,14 +72,14 @@ const history = () => {
             // sessions.map((sessions, index) => (  (this makes normal old to new vertically ordering)
             //using just reverse changes the original array.
             
-            [...sessions].reverse().map((sessions, index) =>(
+            [...sessions].reverse().map((session, index) =>(
                 <View key={index} className='bg-[#1e1e1e] rounded-xl mb-3 p-4'
                   style={{borderWidth: 1, borderColor: '#374151'}}>
                     
                     {/* first row today and right arrow*/}
                   <View className='flex-row justify-between items-center mb-1'>
-                    <Text className=' text-white text-2xl'>{formatDate(sessions.date)}</Text>
-                    <TouchableOpacity onPress={() => navigation.navigate('workoutDetails', { sessions })}>
+                    <Text className=' text-white text-2xl'>{formatDate(session.date)}</Text>
+                    <TouchableOpacity onPress={() => navigation.navigate('workoutDetails', { session })}>
                       <ChevronRight color="white"/>
                     </TouchableOpacity>
                   </View>
@@ -88,7 +88,7 @@ const history = () => {
                   <View className='justify-between flex-row mb-3'>
                     <View className='flex-row items-center '>
                       <Dumbbell color="white" size={10}/>
-                      <Text className='text-gray-400 ml-1'> {sessions.exercises.length} exercises</Text>
+                      <Text className='text-gray-400 ml-1'> {session.exercises.length} exercises</Text>
                     </View>
                     {/* <TouchableOpacity
                     >
@@ -101,7 +101,7 @@ const history = () => {
                   {/*making a divider line */}
                   <View className='h-1 bg-gray-700 my-2 opacity-40'  />
 
-                  {sessions.exercises.map((exercises, i) => {
+                  {session.exercises.map((exercises, i) => {
                     const totalSets = exercises.sets.length;
 
                     const firstSet = exercises.sets[0];
@@ -113,7 +113,7 @@ const history = () => {
                           <Text className='text-gray-400 text-lg'>{totalSets} × {firstSet.reps} @ {firstSet.weight}lbs</Text> 
                         </View>
 
-                        {i !== sessions.exercises.length - 1 && (
+                        {i !== session.exercises.length - 1 && (
                           <View className='h-1 bg-gray-700 my-2 opacity-40'  />
                         )}
                         

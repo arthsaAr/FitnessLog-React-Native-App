@@ -1,3 +1,4 @@
+import { useRoute } from "@react-navigation/native";
 import { useRouter } from "expo-router";
 import { ArrowLeft, Dumbbell, SquarePen, Trash2 } from "lucide-react-native";
 import { Text, TouchableOpacity, View } from "react-native";
@@ -5,7 +6,26 @@ import { Text, TouchableOpacity, View } from "react-native";
 //the order of stack screen determines what is shown first and what is shown second!
 export default function workoutDetails() {
   const router = useRouter();
+  const route = useRoute();
+  const { session } = route.params as { session: any };   //getting specific workout/session
   
+  //changing the format of dates from 6/2/2026 to actual Sun, Jan 5 type
+  const formatDate = (dateString: string) => {
+    const [day, month, year] = dateString.split('/');
+
+    const date = new Date(
+      Number(year),
+      Number(month) - 1,
+      Number(day)
+    );
+
+    return date.toLocaleDateString('en-US', {
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric',
+    });
+  };
+
   return (
     <View className='flex-1 bg-primary px-4 pt-12'>
       <TouchableOpacity
@@ -16,12 +36,12 @@ export default function workoutDetails() {
       </TouchableOpacity>
 
       <Text className="text-white text-3xl font-bold">
-        Today
+        {formatDate(session.date)}
       </Text>
 
       <View className="flex-row gap-3 mb-4 mt-1">
         <Dumbbell color="gray" size={20}/>
-        <Text className="text-gray-400 text-lg font-normal mb-4">3 exercises completed</Text>
+        <Text className="text-gray-400 text-lg font-normal mb-4">{session.exercises.length} exercises completed</Text>
       </View>
 
       {/**Button row! */}
@@ -64,23 +84,46 @@ export default function workoutDetails() {
           </View>
       </View>
 
+      <View className='bg-[#1e1e1e] rounded-xl mb-3 p-3'
+        style={{borderWidth: 1, borderColor: '#374151'}}>
+          <Text className="text-white text-xl font-normal mb-1">
+          DeadLift
+        </Text>
+        <View className="flex-row gap-2">
+            <View className="flex-row gap-1">
+              <Text className="text-green-500 text-nm">4</Text>
+              <Text className="text-gray-500 text-nm">sets</Text>
+            </View>
+
+            <View className="flex-row gap-1">
+              <Text className="text-green-500 text-nm">10</Text>
+              <Text className="text-gray-500 text-nm">reps</Text>
+            </View>
+
+            <View className="flex-row gap-1">
+              <Text className="text-green-500 text-nm">185</Text>
+              <Text className="text-gray-500 text-nm">lbs</Text>
+            </View>
+          </View>
+      </View>
+
       <View className='bg-[#1e1e1e] rounded-xl mt-3 mb-3 p-3'
         style={{borderWidth: 1, borderColor: '#374151'}}>
           <Text className="text-white text-xl font-normal mb-1">
           Workout Summary
         </Text>
         <View className="flex-row justify-between gap-2 p-6">
-            <View className="flex-col gap-1">
+            <View className="flex-col gap-1 items-center">
               <Text className="text-green-500 text-2xl">10</Text>
               <Text className="text-gray-500 text-lg">Total Sets</Text>
             </View>
 
-            <View className="flex-col gap-1">
+            <View className="flex-col gap-1 items-center">
               <Text className="text-green-500 text-2xl">121</Text>
               <Text className="text-gray-500 text-lg">Total Reps</Text>
             </View>
 
-            <View className="flex-col gap-1">
+            <View className="flex-col gap-1 items-center">
               <Text className="text-green-500 text-2xl">1,100</Text>
               <Text className="text-gray-500 text-lg">Total lbs</Text>
             </View>
