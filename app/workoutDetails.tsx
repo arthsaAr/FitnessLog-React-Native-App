@@ -1,14 +1,16 @@
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { useRouter } from "expo-router";
 import { getAuth } from "firebase/auth";
 import { doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import { ArrowLeft, Dumbbell, SquarePen, Trash2 } from "lucide-react-native";
 import { Text, TouchableOpacity, View } from "react-native";
 
+
 //the order of stack screen determines what is shown first and what is shown second!
 export default function workoutDetails() {
   const router = useRouter();
   const route = useRoute();
+  const navigation = useNavigation();
   const { session } = route.params as { session: any };   //getting specific workout/session
   
   const db = getFirestore();
@@ -77,7 +79,7 @@ export default function workoutDetails() {
     totalSets = totalSets+exercise.sets.length;
     for(let set of exercise.sets){
       totalReps = totalReps + Number(set.reps);
-      totalWeight = totalWeight + Number(set.reps) * Number(set.weight);
+      totalWeight = totalWeight + Number(set.weight);
     }
   }
 
@@ -102,6 +104,7 @@ export default function workoutDetails() {
       {/**Button row! */}
       <View className="flex-row gap-2 justify-center">
         <TouchableOpacity 
+          onPress={() => navigation.navigate('editWorkout', { session })}
           className='bg-[#030213] flex-1 gap-2 rounded-lg py-3 px-4 flex-row items-center justify-center mb-6 border border-gray-800'>
           <SquarePen className="w-5 h-5 mr-2" color="white" />
           <Text className='text-white font-semibold text-lg'>Edit Workout</Text>

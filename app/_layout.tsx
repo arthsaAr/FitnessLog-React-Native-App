@@ -16,5 +16,9 @@ export default function RootLayout() {
       name="workoutDetails"
       options={{headerShown: false}}
     />
+    <Stack.Screen 
+      name="editWorkout"
+      options={{headerShown: false}}
+    />
   </Stack>;
 }
