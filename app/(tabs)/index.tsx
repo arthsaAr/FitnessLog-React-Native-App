@@ -53,9 +53,11 @@ export default function Index() {
 
   //getting last workout date
   let lastWorkout = null;
+  let secondlastWorkout = null;
   if(sessions.length > 0){
     const reversed = [...sessions].reverse();
     lastWorkout = reversed[0];
+    secondlastWorkout = reversed[1] || null;;
   }
 
   return (
@@ -204,6 +206,36 @@ export default function Index() {
           <ChevronRight color="gray"/>
         </View>
       </TouchableOpacity>
+     )}
+
+      {secondlastWorkout ? (
+      <TouchableOpacity 
+      className="bg-[#1e1e1e] rounded-xl p-4 mt-3"
+      style={{borderWidth: 1, borderColor: '#374151'}}
+      onPress={() => navigation.navigate('workoutDetails')}   //no session for now, needs to be implemented!
+    >
+        <View className="flex-row justify-between items-center">
+          <View className="flex-row items-center">
+            <View
+              className="self-start"
+              style={{
+                backgroundColor: 'rgba(34,197,94,0.15)',
+                borderRadius:999,
+                padding:8,
+              }}
+            >
+              <Calendar color="#22C55E" size={25} />
+            </View>
+            <View className="ml-1">
+              <Text className="text-white text-xl">{formatDate(secondlastWorkout.date)}</Text>
+              <Text className="text-gray-500 text-lg">{secondlastWorkout.exercises.length} exercises</Text>
+            </View>
+          </View>
+          <ChevronRight color="gray"/>
+        </View>
+      </TouchableOpacity>
+     ) : (
+      <TouchableOpacity></TouchableOpacity>
      )}
 
     <View 
