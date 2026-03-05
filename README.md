@@ -14,16 +14,15 @@ This project is currently in the **development phase**, and features, UI, and ar
 <p align="center">
   <img src="assets/prototype/login.png" width="200" />
   <img src="assets/prototype/home.png" width="200" />
-  <img src="assets/prototype/profile.png" width="200" />
-</p>
-
-<p align="center">
   <img src="assets/prototype/workout.png" width="200" />
-  <img src="assets/prototype/progress.png" width="200" />
-  <img src="assets/prototype/calendar.png" width="200" />
+  <img src="assets/prototype/workoutComplete.png" width="200" />
 </p>
-
-Some designs are changed, New designs will be updated soon!
+<p align="center">
+  <img src="assets/prototype/history.png" width="200" />
+  <img src="assets/prototype/workoutDetails.png" width="200" />
+  <img src="assets/prototype/profile.png" width="200" />
+  <img src="assets/prototype/editProfile.png" width="200" />
+</p>
 
 ---
 
