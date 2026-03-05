@@ -1,13 +1,62 @@
+import { getAuth } from '@firebase/auth';
+import { doc, getFirestore, onSnapshot } from '@firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { Calendar, ChevronRight, Clock, Dumbbell, Plus } from "lucide-react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 export default function Index() {
     const router = useRouter();
     const navigation = useNavigation();
+    const db = getFirestore();
+    const auth = getAuth();
+
+    //state to store the session
+    const [sessions, setSessions] = useState<any[]>([]);
+
+    useEffect(() => {
+      const user = auth.currentUser;
+      if(!user){
+        return;
+      }
+
+      const docRef = doc(db, "workouts", user.uid);
+      const theUpdates = onSnapshot(docRef, (docSnap) => {
+        if(docSnap.exists()){
+          const data = docSnap.data();
+          setSessions(data.sessions || []);
+        }else {
+          setSessions([]);
+        }
+      });
+      return () => theUpdates();
+    }, []);
+
+    //changing the format of dates from 6/2/2026 to actual Sun, Jan 5 type
+  const formatDate = (dateString: string) => {
+    const [day, month, year] = dateString.split('/');
+
+    const date = new Date(
+      Number(year),
+      Number(month) - 1,
+      Number(day)
+    );
+
+    return date.toLocaleDateString('en-US', {
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric',
+    });
+  };
+
+  //getting last workout date
+  let lastWorkout = null;
+  if(sessions.length > 0){
+    const reversed = [...sessions].reverse();
+    lastWorkout = reversed[0];
+  }
 
   return (
     <View className='flex-1 bg-primary px-4 pt-12'>
@@ -35,7 +84,7 @@ export default function Index() {
           <Dumbbell color="green" size={28} />
         </View>
         <Text className="text-white pt-2 text-semibold text-3xl">
-          23
+          {sessions.length}
         </Text>
         <Text className="text-gray-300 text-lg">
         Total Workouts
@@ -57,7 +106,7 @@ export default function Index() {
           <Clock color="#3B82F6" size={28} />
         </View>
         <Text className="text-white pt-2 text-semibold text-2xl">
-          Today
+          {lastWorkout ? formatDate(lastWorkout.date) : 'N/A'}
         </Text>
         <Text className="text-gray-300 text-lg">
         Last Workout
@@ -104,7 +153,8 @@ export default function Index() {
       </TouchableOpacity>
     </View> 
 
-     <TouchableOpacity 
+     {lastWorkout ? (
+      <TouchableOpacity 
       className="bg-[#1e1e1e] rounded-xl p-4 mt-3"
       style={{borderWidth: 1, borderColor: '#374151'}}
       onPress={() => navigation.navigate('workoutDetails')}   //no session for now, needs to be implemented!
@@ -122,13 +172,39 @@ export default function Index() {
               <Calendar color="#22C55E" size={25} />
             </View>
             <View className="ml-1">
-              <Text className="text-white text-xl">Today</Text>
-              <Text className="text-gray-500 text-lg">3 exercises</Text>
+              <Text className="text-white text-xl">{formatDate(lastWorkout.date)}</Text>
+              <Text className="text-gray-500 text-lg">{lastWorkout.exercises.length} exercises</Text>
             </View>
           </View>
           <ChevronRight color="gray"/>
         </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+     ): (
+      <TouchableOpacity 
+      className="bg-[#1e1e1e] rounded-xl p-4 mt-3"
+      style={{borderWidth: 1, borderColor: '#374151'}}
+      onPress={() => navigation.navigate('workoutDetails')}   //no session for now, needs to be implemented!
+    >
+        <View className="flex-row justify-between items-center">
+          <View className="flex-row items-center">
+            <View
+              className="self-start"
+              style={{
+                backgroundColor: 'rgba(34,197,94,0.15)',
+                borderRadius:999,
+                padding:8,
+              }}
+            >
+              <Calendar color="#22C55E" size={25} />
+            </View>
+            <View className="ml-1">
+              <Text className="text-white text-xl">No workouts logged yet!</Text>
+            </View>
+          </View>
+          <ChevronRight color="gray"/>
+        </View>
+      </TouchableOpacity>
+     )}
 
     <View 
       className="items-center justify-center bg-[#1e1e1e] rounded-xl p-4 mt-5"

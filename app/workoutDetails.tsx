@@ -39,14 +39,6 @@ export default function workoutDetails() {
         (s: any) => s.id!== session.id
       );
 
-      //matching date and specific exercise name
-      // const updated = currentSessions.filter(
-      //   (s: any) => !(
-      //     s.date === session.date &&
-      //     JSON.stringify(s.exercises) === JSON.stringify(session.exercises)
-      //   )
-      // );
-
       await updateDoc(userDocRef, {
         sessions: updated,
       });

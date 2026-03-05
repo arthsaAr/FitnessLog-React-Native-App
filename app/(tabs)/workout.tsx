@@ -334,7 +334,7 @@ export default function workout() {
                   {
                     text: 'Replace',
                     style: 'destructive',
-                    onPress: async () => {
+                    onPress: async () => {  // Similar deletion logic as used on workoutDetails page
                       const userDocRef = doc(db, "workouts", user!.uid);
                       const workoutSnap = await getDoc(userDocRef);
                       if(workoutSnap.exists()){
