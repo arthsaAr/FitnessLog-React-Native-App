@@ -7,7 +7,7 @@ const toastConfig = {
   success: (props: any) => (
     <BaseToast 
       {...props}
-      style = {{width: '100%', backgroundColor: '#141414', borderRightWidth: 1, borderRightColor: '#4ADE80', borderLeftWidth: 1, borderLeftColor: '#4ADE80'}}
+      style = {{width: '100%', backgroundColor: '#141414', borderTopWidth: 1, borderTopColor: '#4ADE80', borderRightWidth: 1, borderRightColor: '#4ADE80', borderLeftWidth: 1, borderLeftColor: '#4ADE80'}}
       contentContainerStyle = {{paddingHorizontal: 16}}
       text1Style = {{color: '#ffffff', fontSize: 15, fontWeight: '700'}}
       text2Style = {{color: 'rgba(255, 255, 255, 0.5)', fontSize: 13}}
@@ -16,7 +16,7 @@ const toastConfig = {
   error: (props: any) => (
     <ErrorToast
       {...props}
-      style = {{width: '100%', backgroundColor: '#141414', borderRightWidth: 1, borderRightColor: '#4ADE80', borderLeftWidth: 1, borderLeftColor: '#4ADE80'}}
+      style = {{width: '100%', backgroundColor: '#141414', borderTopWidth: 1, borderTopColor: '#4ADE80', borderRightWidth: 1, borderRightColor: '#4ADE80', borderLeftWidth: 1, borderLeftColor: '#4ADE80'}}
       contentContainerStyle = {{paddingHorizontal: 16}}
       text1Style = {{color: '#ffffff', fontSize: 15, fontWeight: '700'}}
       text2Style = {{color: 'rgba(255, 255, 255, 0.5)', fontSize: 13}}

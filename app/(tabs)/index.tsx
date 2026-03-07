@@ -159,7 +159,7 @@ export default function Index() {
       <TouchableOpacity 
       className="bg-[#1e1e1e] rounded-xl p-4 mt-3"
       style={{borderWidth: 1, borderColor: '#374151'}}
-      onPress={() => navigation.navigate('workoutDetails')}   //no session for now, needs to be implemented!
+      onPress={() => navigation.navigate('workoutDetails', { session: lastWorkout })}   //no session for now, needs to be implemented!
     >
         <View className="flex-row justify-between items-center">
           <View className="flex-row items-center">
@@ -212,7 +212,7 @@ export default function Index() {
       <TouchableOpacity 
       className="bg-[#1e1e1e] rounded-xl p-4 mt-3"
       style={{borderWidth: 1, borderColor: '#374151'}}
-      onPress={() => navigation.navigate('workoutDetails')}   //no session for now, needs to be implemented!
+      onPress={() => navigation.navigate('workoutDetails', { session: secondlastWorkout})}   //no session for now, needs to be implemented!
     >
         <View className="flex-row justify-between items-center">
           <View className="flex-row items-center">

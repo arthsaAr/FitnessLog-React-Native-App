@@ -6,7 +6,6 @@ import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
 
-
 export default function profile() {
   //states for profile inputs
   const [name, setName] = useState('');
