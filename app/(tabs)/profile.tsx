@@ -4,6 +4,7 @@ import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
 import { ArrowLeft, Check, LogOut, Pencil, UserPen } from 'lucide-react-native';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Toast } from 'react-native-toast-message/lib/src/Toast';
 
 
 export default function profile() {
@@ -61,7 +62,8 @@ export default function profile() {
 
   const saveProfile = async () => {
     if(!name.trim() || !age || !height || !weight) {
-      alert('Something went wrong, please check your details!');
+      Toast.show({ type: 'error', text1: 'Something went wrong, please check your details!', position: 'bottom' });
+      // alert('Something went wrong, please check your details!');
       return;
     }
 
@@ -69,7 +71,8 @@ export default function profile() {
       const auth = getAuth();
       const user = auth.currentUser;
       if(!user) {
-        alert('No user logged in');
+        Toast.show({ type: 'error', text1: 'No user logged in', position: 'bottom' });
+        // alert('No user logged in');
         return;
       }
 
@@ -87,10 +90,11 @@ export default function profile() {
         },
         { merge: true }
       );
-      alert('Profile updated successfully');
+      
+      Toast.show({ type: 'success', text1: 'Profile Updated', text2: 'Your profile has been updated successfully.', position: 'bottom' });
       setEdit(false);
         } catch (error) {
-      alert('failed to save profile');
+      Toast.show({ type: 'error', text1: 'Failed to Save Profile', text2: 'Please try again later.', position: 'bottom' });
         }
       }
 

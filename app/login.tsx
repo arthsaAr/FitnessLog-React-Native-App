@@ -2,9 +2,9 @@ import { useRouter } from "expo-router";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { Dumbbell } from "lucide-react-native";
 import React, { useState } from "react";
-import { Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import Toast from 'react-native-toast-message';
 import { auth } from '../firebaseConfig';
-
 
 export default function loginScreen() {
     const [activeTab, setActiveTab] = useState<"login" | "signup">("login");
@@ -18,12 +18,14 @@ export default function loginScreen() {
         const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         
         if (!emailRegex.test(email)) {
-            Alert.alert("Invalid Email", "Please enter a valid email address.");
+            Toast.show({ type: 'error', text1: 'Invalid Email', text2: 'Please enter a valid email address.', position: 'bottom' });
+            // Alert.alert("Invalid Email", "Please enter a valid email address.");
             return;
         }
 
         if (password.length < 6) {
-            Alert.alert("Invalid Password", "Password must be at least 6 characters.");
+            Toast.show({ type: 'error', text1: 'Invalid Password', text2: 'Password must be at least 6 characters.', position: 'bottom' });
+            // Alert.alert("Invalid Password", "Password must be at least 6 characters.");
             return;
         }
 
@@ -33,10 +35,11 @@ export default function loginScreen() {
 
             const userName = user.email?.split("@")[0];
 
-            Alert.alert("Login Successful", `Welcome back, ${userName}`);
+            Toast.show({ type: 'success', text1: 'Login Successful', text2: `Welcome back, ${userName}`, position: 'top' });
             router.replace("/(tabs)");
         } catch (error: any) {
-            Alert.alert("Login Failed", "Please check your email and password and try again.");
+            Toast.show({ type: 'error', text1: 'Login Failed', text2: 'Check your email and password.', position: 'bottom' });
+            // Alert.alert("Login Failed", "Please check your email and password and try again.");
         }
     }
 
@@ -45,12 +48,14 @@ export default function loginScreen() {
         const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         
         if (!emailRegex.test(email)) {
-            Alert.alert("Invalid Email", "Please enter a valid email address.");
+            Toast.show({ type: 'error', text1: 'Invalid Email', text2: 'Please enter a valid email address.', position: 'bottom' });
+            // Alert.alert("Invalid Email", "Please enter a valid email address.");
             return;
         }
 
         if (password.length < 6) {
-            Alert.alert("Weak Password", "Password must be at least 6 characters long.");
+            Toast.show({ type: 'error', text1: 'Weak Password', text2: 'Password must be at least 6 characters long.', position: 'bottom' });
+            // Alert.alert("Weak Password", "Password must be at least 6 characters long.");
             return;
         }
 
@@ -59,10 +64,11 @@ export default function loginScreen() {
             const user = userDetails.user;
             const userName = user.email?.split("@")[0];
 
-            Alert.alert("Account Created", `Welcome, ${userName}`);
+            Toast.show({ type: 'success', text1: 'Account Created', text2: `Welcome, ${userName}`, position: 'top' });
             router.replace("/login");
         } catch (error: any) {
-            Alert.alert("Registration Failed", "Please check your email and password and try again.");
+            Toast.show({ type: 'error', text1: 'Registration Failed', text2: 'Please check your email and password and try again.', position: 'bottom' });
+            // Alert.alert("Registration Failed", "Please check your email and password and try again.");
         }
     }
 

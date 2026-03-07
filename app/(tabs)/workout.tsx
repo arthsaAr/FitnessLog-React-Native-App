@@ -4,6 +4,7 @@ import { arrayUnion, doc, getDoc, getFirestore, setDoc, updateDoc } from 'fireba
 import { Check, ChevronLeft, Minus, Plus, Search, Trophy } from 'lucide-react-native';
 import React, { useCallback, useState } from 'react';
 import { Alert, Dimensions, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import Toast from 'react-native-toast-message';
 import { exercises } from '../../allex';
 
 
@@ -89,13 +90,14 @@ export default function workout() {
   const saveWorkout = async() => {
    //this is for at least exercise should exist
     if(!workoutValidator()){
-      Alert.alert("Incomplete workout", "Please fill in both reps and weight for all sets before saving");
+      Toast.show({ type: 'error', text1: 'Incomplete workout', text2: 'Please fill in both reps and weight for all sets before saving', position: 'bottom' });
+      // Alert.alert("Incomplete workout", "Please fill in both reps and weight for all sets before saving");
       return;
     }
 
     //user login check
     if(!user){
-      alert("Please log in to save your workout!");
+      Toast.show({ type: 'error', text1: 'Not Logged In', text2: 'Please log in to save your workout!', position: 'bottom' });
       return;
     }
 
@@ -121,10 +123,12 @@ export default function workout() {
 
     //for UI changes
     setSaved(true);
-    alert("Workout Saved!");
+    Toast.show({ type: 'success', text1: 'Workout Saved', text2: 'Your workout has been saved successfully.', position: 'bottom' });
+    // alert("Workout Saved!");
     } catch(e){
       console.log("Error saving workout:", e);
-      alert("Failed to save workout.");
+      Toast.show({ type: 'error', text1: 'Failed to Save Workout', text2: 'Please try again later.', position: 'bottom' });
+      // alert("Failed to save workout.");
     }
   };
 

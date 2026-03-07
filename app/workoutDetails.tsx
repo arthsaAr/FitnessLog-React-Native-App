@@ -4,6 +4,7 @@ import { getAuth } from "firebase/auth";
 import { doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import { ArrowLeft, Dumbbell, SquarePen, Trash2 } from "lucide-react-native";
 import { Text, TouchableOpacity, View } from "react-native";
+import Toast from "react-native-toast-message";
 
 
 //the order of stack screen determines what is shown first and what is shown second!
@@ -44,7 +45,8 @@ export default function workoutDetails() {
       await updateDoc(userDocRef, {
         sessions: updated,
       });
-      alert("Workout Deleted!");
+      Toast.show({ type: 'success', text1: 'Workout Deleted', text2: 'Your workout has been deleted successfully.', position: 'bottom' });
+      // alert("Workout Deleted!");
       router.back();    //goes 1 step back to main screen
     } catch(error){
       console.log("Delete error: ", error);
