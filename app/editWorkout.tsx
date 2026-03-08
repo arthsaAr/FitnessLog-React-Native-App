@@ -1,17 +1,65 @@
+import { doc, getDoc, getFirestore, updateDoc } from "@firebase/firestore";
 import { useRoute } from "@react-navigation/native";
 import { useRouter } from "expo-router";
+import { getAuth } from 'firebase/auth';
 import { ArrowLeft, Calendar, Save, Trash2 } from "lucide-react-native";
 import React, { useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import Toast from 'react-native-toast-message';
 
 //the order of stack screen determines what is shown first and what is shown second!
 export default function workoutDetails() {
     const router = useRouter();
+    const auth = getAuth();
     const route = useRoute();
+    const db = getFirestore();
 
     const { session } = route.params as { session: any };   //getting specific workout/session
     console.log('exercises:', session.exercises);
     const [exercises, setExercises] = useState<any[]>(session.exercises || []);   //here each exercise will have its own sets array with rep and weight! (added this when setting up the Add set button)
+
+
+    const saveWorkout = async () => {
+        const user = auth.currentUser;
+        if(!user){
+            return;
+        }
+
+        try {
+            const workoutRef = doc(db, "workouts", user.uid);
+            const docSnap = await getDoc(workoutRef);
+
+            if(!docSnap.exists()){
+                return;
+            }
+
+            const data = docSnap.data();
+            const currentSessions = data.sessions || [];
+
+            //creating updated session/workouts
+            const updatedIs = {
+                ...session,
+                exercises: exercises,
+            };
+
+            //replacing old one
+            const updatedSessions = currentSessions.map((s: any) => {
+                if(s.date === session.date && s.id === session.id){
+                    return updatedIs;
+                }
+                return s;
+            });
+
+            await updateDoc(workoutRef, {
+                sessions: updatedSessions
+            });
+            
+            Toast.show({ type: 'success', text1: 'Workout Updated', text2: 'Your workout has been updated successfully.', position: 'bottom' });
+            router.back();
+        } catch(error){
+            Toast.show({ type: 'error', text1: 'Update Error', text2: 'Error updating your workout, Please try again', position: 'bottom' });
+        }
+    };
 
     //changing the format of dates from 6/2/2026 to actual Sun, Jan 5 type
     const formatDate = (dateString: string) => {
@@ -49,6 +97,7 @@ export default function workoutDetails() {
         </View>
 
         <TouchableOpacity
+          onPress={saveWorkout}
           className='bg-[#030213] gap-2 rounded-lg py-3 px-4 flex-row items-center justify-center mb-6 border border-gray-800'>
           <Save className="w-5 h-5 mr-2" color="white" />
           <Text className='text-white font-semibold text-lg'>Save Changes</Text>
