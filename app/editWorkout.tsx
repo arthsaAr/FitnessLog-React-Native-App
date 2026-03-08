@@ -57,46 +57,49 @@ export default function workoutDetails() {
 
         <View className='bg-[#1e1e1e] rounded-xl mb-1 p-3'
             style={{borderWidth: 1, borderColor: '#374151'}}>
-            <Text className="text-gray-400 font-semibold">Exercise Name</Text>
-
-            <TextInput
-                placeholder='Bench Press'
-                placeholderTextColor="#999" 
-                className='bg-[#2a2a2a] rounded-lg mt-2 px-2 py-1 text-white border border-gray-700' 
-                style={{ height: 40, marginRight: 17 }}
-            />
-
-            <View className="flex-row justify-between mt-4">
-                <Text className="text-gray-400 font-semibold">Sets</Text>
-                <Text className="text-gray-400 font-semibold">Reps</Text>
-                <Text className="text-gray-400 font-semibold">Weight(lbs)</Text>
+            <View className="flex-col gap-1 mt-3">
+                <Text className="text-gray-400 text-sm mb-1">Exercise Name</Text>
+                <TextInput
+                    placeholder='Bench Press'
+                    placeholderTextColor="#999" 
+                    className='bg-[#2a2a2a] rounded-lg px-2 py-2 text-white border border-gray-700' 
+                />
             </View>
 
+            <View className="flex-row gap-3 mt-3">
+                <View className="flex-1">
+                    <Text className="text-gray-400 text-sm mb-1">Sets</Text>
+                    <TextInput
+                        placeholder='4'
+                        placeholderTextColor="#999" 
+                        className='bg-[#2a2a2a] rounded-lg px-2 py-2 text-white border border-gray-700'
+                    />
+                </View>
 
-            <View className="flex-row justify-between mt-3">
-                <TextInput
-                    placeholder='4'
-                    placeholderTextColor="#999" 
-                    className='bg-[#2a2a2a] rounded-lg px-2 py-1 text-white border border-gray-700' 
-                    style={{  width: 70, height: 40, marginRight: 17 }}
-                />
-                <TextInput
-                    placeholder='4'
-                    placeholderTextColor="#999" 
-                    className='bg-[#2a2a2a] rounded-lg px-2 py-1 text-white border border-gray-700' 
-                    style={{ width: 70, height: 40, marginRight: 17 }}
-                />
-                <TextInput
-                    placeholder='4'
-                    placeholderTextColor="#999" 
-                    className='bg-[#2a2a2a] rounded-lg px-2 py-1 text-white border border-gray-700' 
-                    style={{ width: 70, height: 40, marginRight: 17 }}
-                />
+                <View className="flex-1">
+                    <Text className="text-gray-400  text-sm mb-1">Reps</Text>
+                    <TextInput
+                        placeholder='12'
+                        placeholderTextColor="#999" 
+                        className='bg-[#2a2a2a] rounded-lg px-2 py-2 text-white border border-gray-700'
+                    />
+                </View>
+
+                <View className="flex-1">
+                    <Text className="text-gray-400  text-sm mb-1">Weight(lbs)</Text>
+                    <TextInput
+                        placeholder='135'
+                        placeholderTextColor="#999" 
+                        className='bg-[#2a2a2a] rounded-lg px-2 py-2 text-white border border-gray-700'
+                    />
+                </View>
+                
+                
             </View>
 
             <TouchableOpacity className='flex-row bg-white gap-2 rounded-lg mt-4 py-2 px-4 flex-row items-center justify-center mb-6 border border-red-500'>
                 <Trash2 color="red" size={23}/>
-                <Text className="text-red-600 font-semibold text-xl">Remove Exercise</Text>
+                <Text className="text-red-600 font-normal text-xl">Remove Exercise</Text>
             </TouchableOpacity>
         </View>
 
@@ -105,7 +108,7 @@ export default function workoutDetails() {
       style={{borderWidth: 1, borderColor: '#374151'}}
     >
       <Text className="text-gray-400 text-lg text-center">
-        Tip: Set weight to 0 for bodyweight exercises.
+       💡 Tip: Set weight to 0 for bodyweight exercises.
       </Text>
     </View>
 
