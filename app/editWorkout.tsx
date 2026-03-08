@@ -10,7 +10,8 @@ export default function workoutDetails() {
     const route = useRoute();
 
     const { session } = route.params as { session: any };   //getting specific workout/session
-    const [exercises, setExercises] = useState(session.exercises || []);   //here each exercise will have its own sets array with rep and weight! (added this when setting up the Add set button)
+    console.log('exercises:', session.exercises);
+    const [exercises, setExercises] = useState<any[]>(session.exercises || []);   //here each exercise will have its own sets array with rep and weight! (added this when setting up the Add set button)
 
     //changing the format of dates from 6/2/2026 to actual Sun, Jan 5 type
     const formatDate = (dateString: string) => {
@@ -57,8 +58,8 @@ export default function workoutDetails() {
             Exercises
         </Text>
 
-        {exercises.map((exercises: any, index: number) => {
-            const firstSet = exercises.sets[0] || {reps: "", weight: ""};
+        {exercises.map((exercise: any, index: number) => {
+            const firstSet = exercise.sets[0] || {reps: "", weight: ""};
 
             return(
                 <View key={index} className='bg-[#1e1e1e] rounded-xl mb-1 p-3'
@@ -66,7 +67,7 @@ export default function workoutDetails() {
                     <View className="flex-col gap-1 mt-3">
                         <Text className="text-gray-400 text-sm mb-1">Exercise Name</Text>
                         <TextInput
-                            value={exercises.name}
+                            value={exercise.name}
                             onChangeText={(text) => {
                                 const updated = [...exercises];
                                 updated[index].name = text;
@@ -82,7 +83,7 @@ export default function workoutDetails() {
                         <View className="flex-1">
                             <Text className="text-gray-400 text-sm mb-1">Sets</Text>
                             <TextInput
-                                value={String(exercises.sets.length)}  //displaying the number of sets for each exercise
+                                value={String(exercise.sets.length)}  //displaying the number of sets for each exercise
                                 editable={false} //making it non-editable because each new set also needs new reps, so just changing set is not possible
                                 className='bg-[#2a2a2a] rounded-lg px-2 py-2 text-white border border-gray-700'
                             />
@@ -119,7 +120,12 @@ export default function workoutDetails() {
                         </View>
                     </View>
 
-                    <TouchableOpacity className='flex-row bg-white gap-2 rounded-lg mt-4 py-2 px-4 flex-row items-center justify-center mb-6 border border-red-500'>
+                    <TouchableOpacity 
+                        onPress={() => {
+                            const deleted = exercises.filter((_: any, i: number) => i !== index);
+                            setExercises(deleted);
+                        }}
+                        className='flex-row bg-white gap-2 rounded-lg mt-4 py-2 px-4 flex-row items-center justify-center mb-6 border border-red-500'>
                         <Trash2 color="red" size={23}/>
                         <Text className="text-red-600 font-normal text-xl">Remove Exercise</Text>
                     </TouchableOpacity>
