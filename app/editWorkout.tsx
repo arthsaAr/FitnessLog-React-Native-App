@@ -1,6 +1,7 @@
 import { useRoute } from "@react-navigation/native";
 import { useRouter } from "expo-router";
 import { ArrowLeft, Calendar, Save, Trash2 } from "lucide-react-native";
+import React, { useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 
 //the order of stack screen determines what is shown first and what is shown second!
@@ -9,7 +10,8 @@ export default function workoutDetails() {
     const route = useRoute();
 
     const { session } = route.params as { session: any };   //getting specific workout/session
-  
+    const [exercises, setExercises] = useState(session.exercises || []);   //here each exercise will have its own sets array with rep and weight! (added this when setting up the Add set button)
+
     //changing the format of dates from 6/2/2026 to actual Sun, Jan 5 type
     const formatDate = (dateString: string) => {
         const [day, month, year] = dateString.split('/');
@@ -30,11 +32,11 @@ export default function workoutDetails() {
     return (
         <View className='flex-1 bg-primary px-4 pt-12'>
            <TouchableOpacity
-            onPress={() => router.back()} 
-            className="flex-row gap-1 mb-4">
-            <ArrowLeft color="gray" size={30}/>
-            <Text className="text-gray-500 text-xl font-normal mb-1">Cancel</Text>
-        </TouchableOpacity>
+                onPress={() => router.back()} 
+                className="flex-row gap-1 mb-4">
+                <ArrowLeft color="gray" size={30}/>
+                <Text className="text-gray-500 text-xl font-normal mb-1">Cancel</Text>
+            </TouchableOpacity>
 
         <Text className="text-white text-3xl font-bold">
             Edit Workout
@@ -55,55 +57,79 @@ export default function workoutDetails() {
             Exercises
         </Text>
 
-        <View className='bg-[#1e1e1e] rounded-xl mb-1 p-3'
-            style={{borderWidth: 1, borderColor: '#374151'}}>
-            <View className="flex-col gap-1 mt-3">
-                <Text className="text-gray-400 text-sm mb-1">Exercise Name</Text>
-                <TextInput
-                    placeholder='Bench Press'
-                    placeholderTextColor="#999" 
-                    className='bg-[#2a2a2a] rounded-lg px-2 py-2 text-white border border-gray-700' 
-                />
-            </View>
+        {exercises.map((exercises: any, index: number) => {
+            const firstSet = exercises.sets[0] || {reps: "", weight: ""};
 
-            <View className="flex-row gap-3 mt-3">
-                <View className="flex-1">
-                    <Text className="text-gray-400 text-sm mb-1">Sets</Text>
-                    <TextInput
-                        placeholder='4'
-                        placeholderTextColor="#999" 
-                        className='bg-[#2a2a2a] rounded-lg px-2 py-2 text-white border border-gray-700'
-                    />
+            return(
+                <View key={index} className='bg-[#1e1e1e] rounded-xl mb-1 p-3'
+                    style={{borderWidth: 1, borderColor: '#374151'}}>
+                    <View className="flex-col gap-1 mt-3">
+                        <Text className="text-gray-400 text-sm mb-1">Exercise Name</Text>
+                        <TextInput
+                            value={exercises.name}
+                            onChangeText={(text) => {
+                                const updated = [...exercises];
+                                updated[index].name = text;
+                                setExercises(updated);
+                            }}
+                            placeholder='Exercise'
+                            placeholderTextColor="#999" 
+                            className='bg-[#2a2a2a] rounded-lg px-2 py-2 text-white border border-gray-700' 
+                        />
+                    </View>
+
+                    <View className="flex-row gap-3 mt-3">
+                        <View className="flex-1">
+                            <Text className="text-gray-400 text-sm mb-1">Sets</Text>
+                            <TextInput
+                                value={String(exercises.sets.length)}  //displaying the number of sets for each exercise
+                                editable={false} //making it non-editable because each new set also needs new reps, so just changing set is not possible
+                                className='bg-[#2a2a2a] rounded-lg px-2 py-2 text-white border border-gray-700'
+                            />
+                        </View>
+
+                        <View className="flex-1">
+                            <Text className="text-gray-400  text-sm mb-1">Reps</Text>
+                            <TextInput
+                                value={String(firstSet.reps)}
+                                onChangeText={(text) => {
+                                    const updated = [...exercises];
+                                    updated[index].sets[0].reps = Number(text);
+                                    setExercises(updated);
+                                }}
+                                placeholder='Reps'
+                                placeholderTextColor="#999" 
+                                className='bg-[#2a2a2a] rounded-lg px-2 py-2 text-white border border-gray-700'
+                            />
+                        </View>
+
+                        <View className="flex-1">
+                            <Text className="text-gray-400  text-sm mb-1">Weight(lbs)</Text>
+                            <TextInput
+                                value={String(firstSet.weight)}
+                                onChangeText={(text) => {
+                                    const updated = [...exercises];
+                                    updated[index].sets[0].weight = Number(text);
+                                    setExercises(updated);
+                                }}
+                                placeholder='Weight'
+                                placeholderTextColor="#999" 
+                                className='bg-[#2a2a2a] rounded-lg px-2 py-2 text-white border border-gray-700'
+                            />
+                        </View>
+                    </View>
+
+                    <TouchableOpacity className='flex-row bg-white gap-2 rounded-lg mt-4 py-2 px-4 flex-row items-center justify-center mb-6 border border-red-500'>
+                        <Trash2 color="red" size={23}/>
+                        <Text className="text-red-600 font-normal text-xl">Remove Exercise</Text>
+                    </TouchableOpacity>
                 </View>
+            );
+        })}
 
-                <View className="flex-1">
-                    <Text className="text-gray-400  text-sm mb-1">Reps</Text>
-                    <TextInput
-                        placeholder='12'
-                        placeholderTextColor="#999" 
-                        className='bg-[#2a2a2a] rounded-lg px-2 py-2 text-white border border-gray-700'
-                    />
-                </View>
+        
 
-                <View className="flex-1">
-                    <Text className="text-gray-400  text-sm mb-1">Weight(lbs)</Text>
-                    <TextInput
-                        placeholder='135'
-                        placeholderTextColor="#999" 
-                        className='bg-[#2a2a2a] rounded-lg px-2 py-2 text-white border border-gray-700'
-                    />
-                </View>
-                
-                
-            </View>
-
-            <TouchableOpacity className='flex-row bg-white gap-2 rounded-lg mt-4 py-2 px-4 flex-row items-center justify-center mb-6 border border-red-500'>
-                <Trash2 color="red" size={23}/>
-                <Text className="text-red-600 font-normal text-xl">Remove Exercise</Text>
-            </TouchableOpacity>
-        </View>
-
-<View 
+    <View   
       className="items-center justify-center bg-[#1e1e1e] rounded-xl p-4 mt-5"
       style={{borderWidth: 1, borderColor: '#374151'}}
     >
