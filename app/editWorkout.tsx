@@ -55,7 +55,7 @@ export default function workoutDetails() {
             });
             
             Toast.show({ type: 'success', text1: 'Workout Updated', text2: 'Your workout has been updated successfully.', position: 'bottom' });
-            router.back();
+            router.replace("/history");
         } catch(error){
             Toast.show({ type: 'error', text1: 'Update Error', text2: 'Error updating your workout, Please try again', position: 'bottom' });
         }
