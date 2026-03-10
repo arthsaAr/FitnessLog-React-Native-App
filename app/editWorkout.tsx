@@ -182,8 +182,6 @@ export default function workoutDetails() {
             );
         })}
 
-        
-
     <View   
       className="items-center justify-center bg-[#1e1e1e] rounded-xl p-4 mt-5"
       style={{borderWidth: 1, borderColor: '#374151'}}

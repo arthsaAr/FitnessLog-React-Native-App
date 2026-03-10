@@ -90,12 +90,6 @@ const history = () => {
                       <Dumbbell color="white" size={10}/>
                       <Text className='text-gray-400 ml-1'> {session.exercises.length} exercises</Text>
                     </View>
-                    {/* <TouchableOpacity
-                    >
-                      <View>
-                        <Trash2 color="green" size={20}/>
-                      </View>
-                    </TouchableOpacity> */}
                   </View>
 
                   {/*making a divider line */}

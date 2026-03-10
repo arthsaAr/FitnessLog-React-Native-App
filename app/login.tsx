@@ -180,7 +180,6 @@ export default function loginScreen() {
                     </Text>
                 </TouchableOpacity>
             </View>
-
         </View>
     </View>
     );

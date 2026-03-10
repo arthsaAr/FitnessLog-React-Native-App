@@ -97,8 +97,6 @@ export default function profile() {
         }
       }
 
-  
-
   return (
     <View className='flex-1 bg-primary px-4 pt-12'>
       {!edit ? (

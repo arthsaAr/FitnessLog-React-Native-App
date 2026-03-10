@@ -246,12 +246,7 @@ export default function Index() {
         💪 Consistency is key! Try to log your workouts regularly to track your fitness journey.
       </Text>
     </View>
-
-
-
   </ScrollView>
-
-
     </View>
   );
 }
