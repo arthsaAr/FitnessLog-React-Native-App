@@ -35,7 +35,7 @@ export default function loginScreen() {
 
             const userName = user.email?.split("@")[0];
 
-            Toast.show({ type: 'success', text1: 'Login Successful', text2: `Welcome back, ${userName}`, position: 'top' });
+            Toast.show({ type: 'success', text1: 'Login Successful', text2: `Welcome back, ${userName}`, position: 'bottom' });
             router.replace("/(tabs)");
         } catch (error: any) {
             Toast.show({ type: 'error', text1: 'Login Failed', text2: 'Check your email and password.', position: 'bottom' });
