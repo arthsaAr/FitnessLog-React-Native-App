@@ -135,18 +135,8 @@ export default function workoutDetails() {
               </Text>
             <View className="flex-row gap-2">
                 <View className="flex-row gap-1">
-                  <Text className="text-green-500 text-nm">{totalSets}</Text>
-                  <Text className="text-gray-500 text-nm">sets</Text>
-                </View>
-
-                <View className="flex-row gap-1">
-                  <Text className="text-green-500 text-nm">{firstSet.reps}</Text>
-                  <Text className="text-gray-500 text-nm">reps</Text>
-                </View>
-
-                <View className="flex-row gap-1">
-                  <Text className="text-green-500 text-nm">{firstSet.weight}</Text>
-                  <Text className="text-gray-500 text-nm">lbs</Text>
+                  <Text className="text-green-500 text-lg">{totalSets}</Text>
+                  <Text className="text-gray-500 text-lg">sets</Text>
                 </View>
               </View>
           </View>
