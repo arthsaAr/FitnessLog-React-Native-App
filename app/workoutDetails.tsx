@@ -113,7 +113,7 @@ export default function workoutDetails() {
         </TouchableOpacity>
         <TouchableOpacity 
           onPress={handleWorkoutDeletion}
-          className='bg-[#030213] gap-2 rounded-lg py-3 px-4 flex-row items-center justify-center mb-6 border border-red-800'>
+          className='bg-[#030213] gap-2 rounded-lg py-3 px-4 flex-row items-center justify-center mb-6 border border-red-900'>
           <Trash2 color="red" />
         </TouchableOpacity>
       </View>
@@ -134,23 +134,24 @@ export default function workoutDetails() {
                 {exercise.name}
               </Text>
 
-            <View key={index} className='bg-[#2a2a2a] rounded-lg mb-3 p-2'>
-              <View className="flex-row justify-between gap-2">
-                  <Text className="text-gray-400 text-normal">Set 1</Text>
-                  <View className="flex-row gap-2">
-                    <View className="flex-row gap-1">
-                      <Text className="text-green-500 text-normal">12</Text>
-                      <Text className="text-gray-500 text-normal">reps</Text>
+            {exercise.sets.map((set: any, setIndex: number) => (
+              <View key={setIndex} className='bg-[#2a2a2a] rounded-lg mb-3 p-2'>
+                <View className="flex-row justify-between gap-2">
+                    <Text className="text-gray-400 text-normal">Set {setIndex + 1}</Text>
+                    <View className="flex-row gap-2">
+                      <View className="flex-row gap-1">
+                        <Text className="text-green-500 text-normal">{set.reps}</Text>
+                        <Text className="text-gray-500 text-normal">reps</Text>
+                      </View>
+                      <View className="flex-row gap-1">
+                        <Text className="text-green-500 text-normal">{set.weight}</Text>
+                        <Text className="text-gray-500 text-normal">lbs</Text>
+                      </View>
                     </View>
-                    <View className="flex-row gap-1">
-                      <Text className="text-green-500 text-normal">185</Text>
-                      <Text className="text-gray-500 text-normal">lbs</Text>
-                    </View>
-                  </View>
+                </View>
               </View>
-            </View>
-
-
+            ))}
+            
             <View className='h-1 bg-gray-700 my-1 opacity-40'  />
             <View className="flex-row gap-2">
                 <View className="flex-row gap-1">
