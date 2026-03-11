@@ -113,7 +113,7 @@ export default function workoutDetails() {
         </TouchableOpacity>
         <TouchableOpacity 
           onPress={handleWorkoutDeletion}
-          className='bg-white gap-2 rounded-lg py-3 px-4 flex-row items-center justify-center mb-6 border border-red-500'>
+          className='bg-[#030213] gap-2 rounded-lg py-3 px-4 flex-row items-center justify-center mb-6 border border-red-800'>
           <Trash2 color="red" />
         </TouchableOpacity>
       </View>
@@ -133,10 +133,29 @@ export default function workoutDetails() {
               <Text className="text-white text-xl font-normal mb-1">
                 {exercise.name}
               </Text>
+
+            <View key={index} className='bg-[#2a2a2a] rounded-lg mb-3 p-2'>
+              <View className="flex-row justify-between gap-2">
+                  <Text className="text-gray-400 text-normal">Set 1</Text>
+                  <View className="flex-row gap-2">
+                    <View className="flex-row gap-1">
+                      <Text className="text-green-500 text-normal">12</Text>
+                      <Text className="text-gray-500 text-normal">reps</Text>
+                    </View>
+                    <View className="flex-row gap-1">
+                      <Text className="text-green-500 text-normal">185</Text>
+                      <Text className="text-gray-500 text-normal">lbs</Text>
+                    </View>
+                  </View>
+              </View>
+            </View>
+
+
+            <View className='h-1 bg-gray-700 my-1 opacity-40'  />
             <View className="flex-row gap-2">
                 <View className="flex-row gap-1">
-                  <Text className="text-green-500 text-lg">{totalSets}</Text>
-                  <Text className="text-gray-500 text-lg">sets</Text>
+                  <Text className="text-green-500 text-normal">{totalSets}</Text>
+                  <Text className="text-gray-500 text-normal">sets total</Text>
                 </View>
               </View>
           </View>
