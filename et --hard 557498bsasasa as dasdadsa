@@ -1,0 +1,97 @@
+[33m557498b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m cleaned up all the api and ids into a .env file
+[33m1a2aed6[m made the sets view on UI dynamic - correctly shows each specific sets per workout
+[33mfd26a7a[m adding a new UI without editable sets for workoutDetails page
+[33maf631f5[m removed the reps and weight from UI in workoutDetails
+[33m55b1d97[m reverted the login success popup to bottom from top
+[33mbff9eba[m Updated the loading icon to app icon
+[33m3ae9c36[m removing commented code
+[33me796fe9[m Fixes #7 - Current version just shifts back to history page(skips the force refresh required for the workoutDetails page)
+[33m1949c1c[m save workout implemented, can now correctly change old workouts and update it
+[33mae72aeb[m implemented Remove button
+[33mbb86476[m made the exercises card dynamic, and correctly render editable exercises
+[33me7b8665[m re-organized the edit workout page(workout card)
+[33m9dbe6bb[m Added overall structure for the editWorkout page(UI)
+[33ma34e998[m Completed the routing to workoutDetails page from home page
+[33mc4a2b79[m Changed the default alerts UI to react-native-toast with custom design matching the app UI
+[33m5cf8ab8[m Added final page - Edit workout page
+[33mdb8c031[m Addit last two workout details in recent workouts of home page
+[33m0b64953[m Merge branch 'main' of github.com:arthsaAr/FitnessLog-React-Native-App
+[33m51bc57e[m Home screen fetches curUser data on the screen
+[33m636a677[m Update README to remove design change note
+[33m7b0e8c3[m Update images in README for new design prototypes
+[33mcee9b88[m Adding current app screens
+[33ma11d31a[m Fixes #4 - Removed the pop-up and added a refined option to let user replace previous workout or log new one for same day
+[33m3da1c0e[m Summary section correctly calculates totals of sets, reps and weight
+[33m912023a[m Implemented dynamic workout view with all exercises in that specific workout
+[33mf17cdfd[m workout deletion uses ID instead of date and string matching
+[33ma6ca5e7[m Added id for each workout when saved
+[33m658c120[m Implemented deletion of a workout
+[33mddf2f12[m workoutDetails screen can detect date and number of exercises per specific workout
+[33m05f22b4[m Completed basic structure of workout details page
+[33m5291274[m Adding Edit Workout and trash button
+[33m2c6352a[m Added simple heading for workoutDetail page along with proper router back option
+[33m78773ee[m Merge branch 'main' of github.com:arthsaAr/FitnessLog-React-Native-App
+[33m644f76c[m connected route from homescreen recent workouts to workoutDetails page
+[33mb478853[m Update project status in README
+[33m23cdc1d[m Added a new page in navigation, for workout details with options to edit and delete(to be implemented)
+[33mfd7862f[m removed the delete button(garbage)
+[33m1683485[m Changed the ordering of exercises from old-to-new to new-to-old
+[33mab8bf6f[m Merge branch 'main' of github.com:arthsaAr/FitnessLog-React-Native-App
+[33m3be77c2[m changed the date format in History page from 11/11/2026 to Sun, Nov 11
+[33m9d41f28[m Update development status in README.md
+[33m247a5b2[m Adding delete buttons for the workouts in history page
+[33m07072b5[m Fixes #6 - history page now updated as new exercises are added/deleted
+[33mfc360b2[m history page fetches exercises from firebase
+[33mdd29075[m clearing history page to implement dynamic workout view based on user
+[33me996b1f[m adding back the recent workouts section in home page with new design
+[33m32522db[m Removing all commented codes from (tabs)
+[33mdf085e0[m removing extra functionality to firstly complete the core goal of the app
+[33m7f426a4[m removed the timing component from all the pages
+[33m1dec1ac[m fixed save button to save valid reps and sets
+[33m5a1ee46[m implemented functionality for minus button
+[33m7657894[m added a set reducer minus(button)
+[33m4d83673[m removed the commented codes and added some comments
+[33m706d47c[m Added workout save functionality to Firebase
+[33m1bf4388[m Fixes #1
+[33m6900caa[m Merge branch 'main' of github.com:arthsaAr/FitnessLog---React-Native-App
+[33mae8e10f[m refining UI for starting functionalities implementation
+[33m44d17cd[m Update README with note on design changes
+[33md516985[m Added back button in workout exercise selection screen
+[33mfb7505e[m small refinement in profile screen
+[33mea2f4c6[m Corrected the update of profile name in Profile page
+[33ma9af410[m fixing the workout screen staying in same state when the tabs were switched
+[33mbc5774c[m Refined the history page, now has better starting logged workout box
+[33md587f52[m Adding a section in home page
+[33mbd8b614[m start button functions and responds to click
+[33m81d68fb[m added a start workout button on home page with gradient colors(green)
+[33me796c99[m added start new workout button in home screen
+[33m4951bb4[m Clearing Home screen for implementing new design
+[33m2baf066[m added a basic structure of History page
+[33meafd45e[m Changing the tabs structure(hiding two tabs, will be implemented in future)
+[33mfa0d197[m completed the calendar(still need resize correction)
+[33ma0fe7d3[m added navigation in Calendar page
+[33mde96011[m Made a basic structure for Home page matching UI design
+[33m69514c7[m Adding back button in profile page
+[33me5b0919[m Merge branch 'main' of github.com:arthsaAr/FitnessLog---React-Native-App
+[33m1f7e295[m Resizing the prototype images
+[33m3f0d672[m Remove edit profile image from README
+[33md8d71f6[m Revise app prototype section to app screens
+[33m9828206[m Add app prototype section to README
+[33me68b46b[m Adding app protorype for all screens
+[33me93789d[m Setup the Firebase database, and connected with the app
+[33md9e30de[m Completed the edit profile form
+[33ma1a105b[m added Edit Profile page with back option
+[33m402aea7[m adding some comments for clarity
+[33mb84fc73[m Made Basic structure of Profile page
+[33md2c1e4d[m Added a minimal page when a workout is added
+[33m9c70461[m Added a save feature with asyncStorage
+[33mf5e4c2a[m Merge branch 'main' of github.com:arthsaAr/FitnessLog---React-Native-App
+[33mb5f6622[m  Completed the UI following the initial design for Workout page
+[33m3f63e90[m Revise README with project details and status
+[33mf4c8bb9[m Revise README for FitnessTracker Expo app
+[33m5f322a8[m Completed login screen authentication and registration
+[33mfb3953f[m Added login and signup buttons with color/active status change feature
+[33mcf14d67[m Added login screen(basic structure)
+[33mcc97d90[m Starting login screen setup
+[33mab406e8[m Initial commit
+[33m2efcfd3[m Initial commit
