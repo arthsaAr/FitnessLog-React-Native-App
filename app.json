@@ -17,7 +17,8 @@
         "foregroundImage": "./assets/images/mainIcon.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.karnexlabs.fitnessLog"
     },
     "web": {
       "output": "static",
@@ -42,6 +43,12 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "7ed4452d-9406-4ba6-a9c0-3524ba7f33da"
+      }
     }
   }
 }
